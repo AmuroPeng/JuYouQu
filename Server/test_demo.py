@@ -49,7 +49,7 @@ def index():
 
     print(username)
     # return '哈罗 World~'
-    return render_template('index.html', url_str=url_str, my_list=my_list, my_dict=my_dict,form=login_form)
+    return render_template('demo.html', url_str=url_str, my_list=my_list, my_dict=my_dict,form=login_form)
 
 
 @app.route('/orders/<int:order_id>', methods=['GET', 'POST'])
