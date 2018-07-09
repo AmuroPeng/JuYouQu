@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/submenu_food_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/textView_title"
+        android:layout_width="187dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="16dp"
+        android:text="请选择美食类型"
+        android:gravity="center"
+        android:textSize="24sp"
+        app:layout_constraintLeft_toRightOf="@+id/imageButton_back"
+        app:layout_constraintRight_toLeftOf="@+id/imageButton_next"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintHorizontal_bias="0.51" />
+
+    <Button
+        android:id="@+id/imageButton_back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/left_arrow"
+        android:layout_marginStart="8dp" />
+
+    <Button
+        android:id="@+id/imageButton_next"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:background="@drawable/right_arrow"
+        android:layout_marginEnd="8dp" />
+
+    <TableLayout
+        android:layout_width="328dp"
+        android:layout_height="419dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_title">
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="60dp">
+
+            <Button
+                android:id="@+id/imageButton_chicken"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/submenu_food_chicken"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY"
+                tools:layout_editor_absoluteX="148dp"
+                tools:layout_editor_absoluteY="113dp" />
+
+            <Button
+                android:id="@+id/imageButton_fastfood"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:layout_height="match_parent"
+                android:layout_width="wrap_content"
+                android:background="@drawable/submenu_food_fastfood"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="113dp" />
+
+            <Button
+                android:id="@+id/imageButton_fish"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/submenu_food_fish"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY"
+                tools:layout_editor_absoluteX="280dp"
+                tools:layout_editor_absoluteY="113dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_chicken"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="烤肉" />
+
+            <TextView
+                android:id="@+id/textView_fastfood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="快餐" />
+
+            <TextView
+                android:id="@+id/textView_fish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="烤鱼" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="20dp"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="8dp">
+
+            <Button
+                android:id="@+id/imageButton_hotpot"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:adjustViewBounds="true"
+                android:background="@drawable/submenu_food_hotpot"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY" />
+
+            <Button
+                android:adjustViewBounds="true"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imageButton_pizza"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/submenu_food_pizza" />
+
+            <Button
+                android:adjustViewBounds="true"
+                android:maxHeight="1000dp"
+                android:maxWidth="1000dp"
+                android:scaleType="fitXY"
+                android:id="@+id/imageButton_seafood"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/submenu_food_seafood" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textView_hotpot"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="火锅" />
+
+            <TextView
+                android:id="@+id/textView_pizza"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="披萨" />
+
+            <TextView
+                android:id="@+id/textView_seafood"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="海鲜" />
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp">
+
+            <Button
+                android:id="@+id/imageButton_sushi"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/submenu_food_sushi" />
+
+            <Button
+                android:id="@+id/imageButton_self_help"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/submenu_food_self_help" />
+
+            <Button
+                android:id="@+id/imageButton_other"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@drawable/submenu_food_other" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="222dp">
+
+            <TextView
+                android:id="@+id/textView_sushi"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="寿司" />
+
+            <TextView
+                android:id="@+id/textView_self_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="自助餐" />
+
+            <TextView
+                android:id="@+id/textView_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="其他" />
+        </TableRow>
+
+    </TableLayout>
+
+</android.support.constraint.ConstraintLayout>

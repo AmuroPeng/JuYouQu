@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/submenu_food_background">
+
+    <Button
+        android:id="@+id/imageButton_back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginLeft="8dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:background="@drawable/left_arrow"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
+
+    <TextView
+        android:id="@+id/textView_temp"
+        android:layout_width="252dp"
+        android:layout_height="73dp"
+        android:hint="在这里添加好友间位置与目的地！"
+        android:textSize="24sp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="197dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <RelativeLayout
+        android:layout_width="338dp"
+        android:layout_height="227dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="132dp"
+        android:background="@drawable/share_destination_details"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView_temp">
+
+        <ImageButton
+            android:id="@+id/imageButton_two"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="centerCrop"
+            android:background="@drawable/number_two"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="418dp" />
+
+        <TextView
+            android:id="@+id/textView_name_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageButton_one"
+            android:layout_centerHorizontal="true"
+            android:text="魔法厨房(龙美店)"
+            android:textSize="25dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="350dp" />
+
+        <TextView
+            android:id="@+id/textView_name_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView_time_two"
+            android:layout_alignStart="@+id/textView_time_two"
+            android:layout_alignTop="@+id/imageButton_two"
+            android:text="北喜寿司(武胜路店)"
+            android:textSize="25dp"
+            tools:layout_editor_absoluteX="38dp"
+            tools:layout_editor_absoluteY="350dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_one"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_above="@+id/imageButton_two"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="10dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/number_one" />
+
+        <TextView
+            android:id="@+id/textView_time_two"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageButton_two"
+            android:layout_alignLeft="@+id/textView_time_one"
+            android:layout_alignStart="@+id/textView_time_one"
+            android:text="约33分钟"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textView_time_one"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageButton_one"
+            android:layout_alignLeft="@+id/textView_name_one"
+            android:layout_alignStart="@+id/textView_name_one"
+            android:text="约20分钟"
+            android:textSize="20dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_detail_two"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/textView_time_two"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView_name_two"
+            android:scaleType="centerCrop"
+            android:background="@drawable/item_detail" />
+
+        <ImageButton
+            android:id="@+id/imageButton_detail_one"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignBottom="@+id/textView_time_one"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/textView_name_one"
+            android:scaleType="centerCrop"
+            android:background="@drawable/item_detail" />
+
+    </RelativeLayout>
+
+</android.support.constraint.ConstraintLayout>
