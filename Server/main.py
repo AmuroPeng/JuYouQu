@@ -16,11 +16,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import func
 
-
 app = Flask(__name__)
 app.secret_key = '111'
-
-
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -49,20 +46,7 @@ def signup():
         elif password != password2:
             flash('密码不一致')
         else:
-            # 创建对象的基类:
-            Base = declarative_base()
-            # 初始化数据库连接:
-            engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test')
-            # 创建DBSession类型:
-            DBSession = sessionmaker(bind=engine)
-            db = DBSession()
-            count = db.query(func.count(module.User.id)).scalar()
-            count = count + 1
-            new_user = module.User(id='9', name='Bob', password='123456', loc_longitude=1.1, loc_latitude=0.1)
-            # new_user = module.User(id=count, name=username, password='222', loc_longitude=1.1, loc_latitude=0.1)
-            db.add(new_user)
-            db.commit()
-            db.close()
+            module.add_user(username,password)
             logging.info('已注册新用户：' + username)
             return redirect('/')
     return render_template('signup.html')
@@ -73,6 +57,11 @@ def signup():
 def index():
     # return '哈罗 World~'
     return render_template('index.html')  # , username=session['username']
+
+
+@app.route('/location', methods=['GET', 'POST'])
+def location():
+    return render_template('location.html')
 
 
 if __name__ == '__main__':

@@ -20,9 +20,11 @@
     
     <title>Index </title>
     
-    <link href="index/css/index-bootstrap.css" rel="stylesheet" />
-	<link href="index/css/coming-sssoon.css" rel="stylesheet" />    
-    
+{#    <link href="index/css/index-bootstrap.css" rel="stylesheet" />#}
+{#	<link href="index/css/coming-sssoon.css" rel="stylesheet" />   #}
+    <link rel="stylesheet" href="{{ url_for('static', filename='index/css/index-bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index/css/coming-sssoon.css') }}">
+
     <!--     Fonts     -->
     <link href="http://netdna.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.css" rel="stylesheet">
     <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
@@ -98,7 +100,7 @@
        <div class="content">
             <h4 class="motto">开始一次方便、快捷的聚餐吧</h4>
             <div style="text-align: center; ">
-            <a href="location.html">
+            <a href="/location">
             <img src="index/images/BackupUI/ju_logo.png" alt="your-image" class=" pic_border" style="margin: 0 auto;" >
             </a>
             </div>

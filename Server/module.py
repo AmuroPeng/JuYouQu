@@ -6,7 +6,7 @@ import mysql.connector
 import sqlalchemy
 
 # 导入:
-from sqlalchemy import Column, String, create_engine, Float, DateTime
+from sqlalchemy import Column, String, create_engine, Float, DateTime,func
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
@@ -26,16 +26,26 @@ class User(Base):
     password = Column(String(20))
     loc_longitude = Column(Float)
     loc_latitude = Column(Float)
-    time = Column(DateTime, default=datetime.datetime.utcnow)
+    time = Column(DateTime, default=datetime.datetime.now)
 
 
 # 初始化数据库连接:
-# engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test2')
+engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test2')
 # 创建DBSession类型:
-# DBSession = sessionmaker(bind=engine)
+DBSession = sessionmaker(bind=engine)
+
 
 # # 建表操作
 # Base.metadata.create_all(engine)
+
+def add_user(name, password, loc_longitude, loc_latitude):
+    session = DBSession()
+    new_id = session.query(func.count(User.id)).scalar()+1
+    new_user = User(id=new_id, name=name, password=password, loc_longitude=loc_longitude, loc_latitude=loc_latitude)
+    session.add(new_user)
+    session.commit()
+    session.close()
+
 
 # # 创建session对象:
 # session = DBSession()
@@ -47,6 +57,7 @@ class User(Base):
 # session.commit()
 # # 关闭session:
 # session.close()
+
 #
 # # 创建Session:
 # session = DBSession()
@@ -57,3 +68,6 @@ class User(Base):
 # print('name:', user.name)
 # # 关闭Session:
 # session.close()
+
+if __name__ == '__main__':
+    add_user('abc', 'aaa','','') #loc_longitude=1.1, loc_latitude=2.2
