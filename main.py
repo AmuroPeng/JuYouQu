@@ -20,7 +20,8 @@ def login():
         password = request.form.get('password')
         if password == module.search_login_get_password(username):
             print('密码正确')
-            session['lng'], session['lat'] = module.search_login_get_loc(username)
+            session['lng'], session['lat'] = module.search_login_get_loc(username)  # 并且更新了时间
+            session['username'] = username
             return redirect('/')
         else:
             flash('用户名或密码错误')

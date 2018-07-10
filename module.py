@@ -13,6 +13,7 @@ from sqlalchemy import Column, String, create_engine, Float, DateTime, func, Int
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
+import time
 
 # 创建对象的基类:
 Base = declarative_base()
@@ -179,10 +180,23 @@ def search_login_get_loc(username):
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
     user = session.query(User).filter(User.name == username).one()
-
-    # 关闭Session:
+    print(user.time)
+    user.time = datetime.datetime.now()
+    x = user.loc_longitude
+    y = user.loc_latitude
+    session.commit()
     session.close()
-    return user.loc_longitude, user.loc_latitude
+    return x,y
+
+
+# def search_():
+#     # 创建Session:
+#     session = DBSession()
+#     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+#     user = session.query(User).filter(User.name == username).one()
+#     # 关闭Session:
+#     session.close()
+#     return user.loc_longitude, user.loc_latitude
 
 
 if __name__ == '__main__':
@@ -199,4 +213,4 @@ if __name__ == '__main__':
     #     num = num + 1
     # s = Image.open("C:/Users/1996j/Desktop/1.jpg")
     # s.show()
-    print(search_login_get_password('111'))
+    print(search_login_get_loc('111'))
