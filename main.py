@@ -4,12 +4,15 @@ from flask import Flask, render_template, flash, redirect, jsonify
 from flask import request, session
 import form
 import module
+import json
 import logging
 import pos_generation
 from sqlalchemy.orm import class_mapper
 
 app = Flask(__name__)
 app.secret_key = '111'
+# 全局变量
+friend_dict = {}  # 好友列表（包含位置）
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -47,8 +50,9 @@ def signup():
         elif type(pos) == str:
             flash(pos)
         else:
-            module.add_user(username, password, 1, pos['lng'], pos['lat'])
+            new_id = module.add_user(username, password, 1, pos['lng'], pos['lat'])
             session['username'] = username
+            session['id'] = new_id
             print('已注册新用户：' + username)
             return redirect('/')
     return render_template('signup.html', signup_form=signup_form)
@@ -60,9 +64,16 @@ def index():
     return render_template('index.html', username=session['username'])
 
 
-@app.route('/location', methods=['GET', 'POST'])
-def location():
-    return render_template('location.html')
+@app.route('/group/new', methods=['GET', 'POST'])
+def make_group():
+    if request.method == 'GET':
+        # result
+        return render_template('make_group.html')
+
+    if request.method == 'POST':
+        friend_dict = {}  # 用于每次重新添加列表时清空上次记录
+
+        data = json.loads(str(request.get_data(), encoding="UTF-8"))
 
 
 if __name__ == '__main__':

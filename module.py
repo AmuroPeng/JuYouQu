@@ -94,6 +94,7 @@ def add_user(name, password, pic_id, loc_longitude, loc_latitude):
     session.add(new_user)
     session.commit()
     session.close()
+    return new_id
 
 
 def add_shop(name, address, loc_longitude, loc_latitude, evaluate, introduction, category, path_):
@@ -186,8 +187,12 @@ def search_login_get_loc(username):
     y = user.loc_latitude
     session.commit()
     session.close()
-    return x,y
+    return x, y
 
+
+def search_group_get_friends(id):
+    session = DBSession()
+    firend_list = session.query(User).filter(Friend.id_1 == id).all()
 
 # def search_():
 #     # 创建Session:
