@@ -57,7 +57,7 @@ def signup():
 @app.route('/', methods=['GET', 'POST'])
 def index():
     # return '哈罗 World~'
-    return render_template('index.html')  # , username=session['username']
+    return render_template('index.html', username=session['username'])
 
 
 @app.route('/location', methods=['GET', 'POST'])
