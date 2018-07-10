@@ -1,0 +1,453 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_background"
+    tools:context="com.xinghuo.juyouqu.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="325dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="52dp"
+        android:orientation="horizontal"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:id="@+id/linearLayout1"
+        app:layout_constraintHorizontal_bias="0.5">
+
+        <ImageButton
+            android:id="@+id/imageButton_main_restaurant"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/main_restaurant"
+            android:onClick="lay"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_ktv"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_ktv"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_internet"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintHorizontal_bias="0.81"
+            app:layout_constraintLeft_toRightOf="@+id/imageButton_main_all"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/main_internet"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_cinema"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintLeft_toRightOf="@+id/ImageButton_main_restaurant"
+            app:layout_constraintRight_toLeftOf="@+id/imageButton_main_all"
+            android:background="@drawable/main_cinema"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_game"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_game"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="296dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="325dp"
+        android:layout_height="65dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp">
+
+        <ImageButton
+            android:id="@+id/imageButton_main_library"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:background="@drawable/main_library"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_massage"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_massage"
+            tools:layout_editor_absoluteX="40dp"
+            tools:layout_editor_absoluteY="391dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_snack"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintHorizontal_bias="0.81"
+            app:layout_constraintLeft_toRightOf="@+id/imageButton_main_all"
+            app:layout_constraintRight_toRightOf="parent"
+            android:background="@drawable/main_snack"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_sports"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:scaleType="centerCrop"
+            app:layout_constraintHorizontal_bias="0.68"
+            app:layout_constraintLeft_toRightOf="@+id/ImageButton_main_restaurant"
+            app:layout_constraintRight_toLeftOf="@+id/imageButton_main_all"
+            android:background="@drawable/main_sports"
+            tools:layout_editor_absoluteY="296dp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_all"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_weight="1"
+            android:elevation="0dp"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_all"
+            tools:layout_editor_absoluteX="205dp"
+            tools:layout_editor_absoluteY="296dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout4"
+        android:layout_width="324dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/linearLayout1"
+        app:layout_constraintRight_toRightOf="@+id/linearLayout1"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/textView_main_library"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="图书馆"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="227dp" />
+
+        <TextView
+            android:id="@+id/textView_main_massage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text=" SPA" />
+
+        <TextView
+            android:id="@+id/textView_main_snack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="小吃 " />
+
+        <TextView
+            android:id="@+id/textView_main_sports"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text=" 运动" />
+
+        <TextView
+            android:id="@+id/textView_main_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="全部分类" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="324dp"
+        android:layout_height="27dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="@+id/linearLayout1"
+        app:layout_constraintRight_toRightOf="@+id/linearLayout1"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout1">
+
+        <TextView
+            android:id="@+id/textView_main_restaurant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="  美食"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="227dp" />
+
+        <TextView
+            android:id="@+id/textView_main_ktv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:text="     KTV" />
+
+        <TextView
+            android:id="@+id/textView_main_internet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="网吧   " />
+
+        <TextView
+            android:id="@+id/textView_main_cinema"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="  电影院" />
+
+        <TextView
+            android:id="@+id/textView_main_game"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="游戏厅" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/line_like"
+        android:layout_width="0dp"
+        android:layout_height="380dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout4"
+        app:layout_constraintVertical_bias="0.88">
+
+        <TextView
+            android:id="@+id/textView_main_like"
+            android:layout_width="354dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:text="猜你喜欢"
+            android:textSize="15dp"
+            android:textStyle="bold"/>
+
+        <ImageView
+            android:id="@+id/imageView7"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="5dp"
+            app:srcCompat="@drawable/main_like"
+            tools:layout_editor_absoluteX="8dp"
+            tools:layout_editor_absoluteY="224dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:background="@drawable/navigation_background"
+        android:layout_width="383dp"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/linearLayout_option"
+        android:layout_marginBottom="0dp"
+        android:layout_marginRight="0dp">
+
+        <ImageButton
+            android:id="@+id/imageButton_main_home"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/option_home_red"
+            android:scaleType="centerInside" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_locate"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/option_locate_black" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_indent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/option_indent_black" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_user"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/option_user_black" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout_search"
+        android:layout_width="329dp"
+        android:layout_height="37dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout1"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
+
+        <ImageButton
+            android:id="@+id/imageButton_main_search_location"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.54"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_search_location" />
+
+        <TextView
+            android:id="@+id/textView_main_search_location"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="北京"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/imageButton_main_search_search"
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="0.55"
+            android:scaleType="centerCrop"
+            android:background="@drawable/main_search_search" />
+
+        <TextView
+            android:id="@+id/textView_main_search_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginRight="4dp"
+            android:layout_marginTop="0dp"
+            android:layout_weight="1.26"
+            android:background="@drawable/search_text_style"
+            android:gravity="center"
+            android:hint="请输入想搜索的地点或者美食"
+            android:textSize="14sp" />
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
