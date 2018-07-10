@@ -13,21 +13,24 @@ from sqlalchemy import Column, String, create_engine, Float, DateTime, func, Int
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
-import time
 
 # 创建对象的基类:
 Base = declarative_base()
 
 
 # 定义User对象:
+
+length = 100
+
+
 class User(Base):
     # 表的名字:
     __tablename__ = 'user'
 
     # 表的结构:
-    id = Column(String(20), primary_key=True)
-    name = Column(String(20))
-    password = Column(String(20))
+    id = Column(String(length), primary_key=True)
+    name = Column(String(length))
+    password = Column(String(length))
     pic_id = Column(Integer)
     loc_longitude = Column(Float)
     loc_latitude = Column(Float)
@@ -35,60 +38,65 @@ class User(Base):
 
 
 class Shop(Base):
+
     __tablename__ = 'shop'
 
-    id = Column(String(20), primary_key=True)
-    name = Column(String(20))
-    address = Column(String(40))
+    id = Column(String(length), primary_key=True)
+    name = Column(String(length))
+    address = Column(String(length))
     loc_longitude = Column(Float)
     loc_latitude = Column(Float)
     evaluate = Column(Float)
-    introduction = Column(String(100))
-    category = Column(String(20))
-    path = Column(String(40))
+    introduction = Column(String(length))
+    category = Column(String(length))
+    path = Column(String(length))
 
 
 class Friend(Base):
+
     __tablename__ = 'friend'
 
-    id_1 = Column(String(20), primary_key=True)
-    id_2 = Column(String(20))
+    id_1 = Column(String(length), primary_key=True)
+    id_2 = Column(String(length))
 
 
 class Feature(Base):
+
     __tablename__ = 'Feature'
 
-    shop_id = Column(String(20), primary_key=True)
-    property = Column(String(20))
+    shop_id = Column(String(length), primary_key=True)
+    property = Column(String(length))
 
 
 class Order(Base):
+
     __tablename__ = 'Order'
 
-    id = Column(String(20), primary_key=True)
+    id = Column(String(length), primary_key=True)
     # user_id = Column(String(20))
-    shop_id = Column(String(20))
+    shop_id = Column(String(length))
     evaluate = Column(Float)
     time = Column(DateTime, default=datetime.datetime.now)
-    suggest = Column(String(100))
+    suggest = Column(String(length))
 
 
 class Participant(Base):
+
     __tablename__ = 'Participant'
 
-    order_id = Column(String(20), primary_key=True)
-    user_id = Column(String(20), primary_key=True)
+    order_id = Column(String(length), primary_key=True)
+    user_id = Column(String(length), primary_key=True)
 
 
 # 初始化数据库连接:
-engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test3')
+engine = create_engine('mysql+mysqlconnector://root:19961105@localhost:3306/test2')
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 
 
 def add_user(name, password, pic_id, loc_longitude, loc_latitude):
     session = DBSession()
-    new_id = session.query(func.count(User.id)).scalar() + 1
+    new_id = session.query(func.count(User.id)).scalar()+1
     new_user = User(id=new_id, name=name, password=password, pic_id=pic_id,
                     loc_longitude=loc_longitude, loc_latitude=loc_latitude)
     session.add(new_user)
@@ -98,7 +106,7 @@ def add_user(name, password, pic_id, loc_longitude, loc_latitude):
 
 def add_shop(name, address, loc_longitude, loc_latitude, evaluate, introduction, category, path_):
     session = DBSession()
-    new_id = session.query(func.count(Shop.id)).scalar() + 1
+    new_id = session.query(func.count(Shop.id)).scalar()+1
     new_shop = Shop(id=new_id, name=name, address=address, loc_longitude=loc_longitude, loc_latitude=loc_latitude,
                     evaluate=evaluate, introduction=introduction, category=category, path=path_)
     session.add(new_shop)
@@ -140,8 +148,6 @@ def add_participant(order_id, user_id):
 
 # # 建表操作
 Base.metadata.create_all(engine)
-
-
 # # 创建session对象:
 # session = DBSession()
 # # 创建新User对象:
@@ -165,52 +171,31 @@ Base.metadata.create_all(engine)
 # session.close()
 
 
-def search_login_get_password(username):
-    # 创建Session:
-    session = DBSession()
-    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-    user = session.query(User).filter(User.name == username).one()
-    # 关闭Session:
-    session.close()
-    return user.password
-
-
-def search_login_get_loc(username):
-    # 创建Session:
-    session = DBSession()
-    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-    user = session.query(User).filter(User.name == username).one()
-    print(user.time)
-    user.time = datetime.datetime.now()
-    x = user.loc_longitude
-    y = user.loc_latitude
-    session.commit()
-    session.close()
-    return x,y
-
-
-# def search_():
-#     # 创建Session:
-#     session = DBSession()
-#     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
-#     user = session.query(User).filter(User.name == username).one()
-#     # 关闭Session:
-#     session.close()
-#     return user.loc_longitude, user.loc_latitude
+def get_loc(loc):
+    url = 'http://api.map.baidu.com/geocoder/v2/?address=' + loc + '&output=json&ak=cSyuRk9MlTh1GV7dUSNxeM8kyg8Vu9MV'
+    get_result = requests.get(url).json()
+    if get_result['status'] == 0:  # 服务器错误
+        json_result = get_result['result']
+        if json_result['level'] == 'UNKNOWN':
+            return "位置信息有误无法识别，请重新输入"
+        else:
+            return json_result['location']
+    else:
+        return "百度服务器错误暂时无法定位"
 
 
 if __name__ == '__main__':
     num = 1
-    # while(1):
-    #     name_ = input("enter shop name:")
-    #     address_ = input("enter shop address:")
-    #     result = get_loc(address_)
-    #     evaluate_ = input("enter shop evaluate:")
-    #     introduction_ = input("enter shop introduction:")
-    #     category_ = input("enter shop category:")
-    #     path = "/picture/"+str(num)+".jpg"
-    #     add_shop(name_, address_, result['lng'], result['lat'], evaluate_, introduction_, category_, path)
-    #     num = num + 1
+    while(1):
+        name_ = input("enter shop name:")
+        address_ = input("enter shop address:")
+        result = get_loc(address_)
+        evaluate_ = input("enter shop evaluate:")
+        introduction_ = input("enter shop introduction:")
+        category_ = input("enter shop category:")
+        path = "/picture/"+str(num)+".jpg"
+        # print(name_, address_, result, evaluate_, introduction_, category_, path)
+        add_shop(name_, address_, result['lng'], result['lat'], evaluate_, introduction_, category_, path)
+        # num = num + 1
     # s = Image.open("C:/Users/1996j/Desktop/1.jpg")
     # s.show()
-    print(search_login_get_loc('111'))
