@@ -36,7 +36,7 @@ DBSession = sessionmaker(bind=engine)
 
 
 # # 建表操作
-# Base.metadata.create_all(engine)
+Base.metadata.create_all(engine)
 
 def add_user(name, password, loc_longitude, loc_latitude):
     session = DBSession()
@@ -69,5 +69,5 @@ def add_user(name, password, loc_longitude, loc_latitude):
 # # 关闭Session:
 # session.close()
 
-if __name__ == '__main__':
-    add_user('abc', 'aaa','','') #loc_longitude=1.1, loc_latitude=2.2
+# if __name__ == '__main__':
+#     add_user('abc', 'aaa','','') #loc_longitude=1.1, loc_latitude=2.2
