@@ -1,6 +1,5 @@
 # -*- coding:utf-8 -*-
 
-from flask import Flask, render_template, flash, redirect
 import json
 import requests
 
@@ -21,6 +20,3 @@ def get_loc(loc):
 if __name__ == '__main__':
     result = get_loc('北京')
     print(result)
-    if type(result) == dict:
-        print(1)
-    else:print(2)

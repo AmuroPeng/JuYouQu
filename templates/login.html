@@ -10,7 +10,7 @@
     <label>用户名:</label><input type="text" name="username"><br>
     <label>密码:</label><input type="password" name="password"><br>
     <input type="submit" value="登录"><br>
-{#    显示登陆状态消息#}
+    {#    显示登陆状态消息#}
     {% for message in get_flashed_messages() %}
         {{ message }}
     {% endfor %}
