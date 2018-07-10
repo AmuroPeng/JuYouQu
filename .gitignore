@@ -2,3 +2,5 @@
 \.idea/
 
 Server/__pycache__/
+
+__pycache__/

@@ -1,20 +1,11 @@
 # -*- coding:utf-8 -*-
 
-import flask
-import mysql
-import pymysql
-import mysql.connector
-from flask import Flask, render_template, flash, redirect, url_for
+from flask import Flask, render_template, flash, redirect
 from flask import request, session
-from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
 import form
 import module
 import logging
-from sqlalchemy import Column, String, create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import func
+import pos_generation
 
 app = Flask(__name__)
 app.secret_key = '111'
@@ -22,7 +13,6 @@ app.secret_key = '111'
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    error = None
     if request.method == 'POST':
         if request.form['username'] == 'admin':
             session['username'] = request.form['username']
@@ -34,25 +24,29 @@ def login():
 
 @app.route('/signup', methods=['GET', 'POST'])
 def signup():
-    login_form = form.LoginForm()
+    signup_form = form.SignupForm()
     if request.method == 'POST':
 
         username = request.form.get('username')
         password = request.form.get('password')
         password2 = request.form.get('password2')
+        loc = request.form.get('loc')
+
+        pos = pos_generation.get_loc(loc)
 
         if not all([username, password, password2]):
             flash("参数不完整")
         elif password != password2:
             flash('密码不一致')
+        elif type(pos) == str:
+            flash(pos)
         else:
-            module.add_user(username,password)
+            module.add_user(username, password, pos['lat'], pos['lng'])
             logging.info('已注册新用户：' + username)
             return redirect('/')
-    return render_template('signup.html')
+    return render_template('signup.html', signup_form=signup_form)
 
 
-# 定义路由
 @app.route('/', methods=['GET', 'POST'])
 def index():
     # return '哈罗 World~'
