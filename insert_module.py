@@ -1,8 +1,8 @@
 from pos_generation import get_loc
-from module import add_shop
+from module import add_shop, add_friend
 
 
-def add_shops():
+def new_shops():
     # 添加商铺:
     result = get_loc('北京市朝阳区劲松北路2号楼')
     add_shop('北京麦当劳潘家园餐厅', '北京市朝阳区劲松北路2号楼', result['lng'], result['lat'], 5.0,
@@ -96,5 +96,12 @@ def add_shops():
              '/picture/20.jpg')
 
 
+def new_friend():
+    add_friend(1, 2)
+    add_friend(1, 3)
+
+
 if __name__ == '__main__':
-    add_shop();
+    num = 1
+    # new_shops()
+    # new_friend()
