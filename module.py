@@ -208,7 +208,8 @@ def search_friend_get_dict(search_id):
     result = {}
     for i in list:
         user = session.query(User).filter(User.id == i.id_2).one()
-        result[user.id] = {'name': user.name, 'time': user.time, 'pic': user.pic, 'loc_lng': user.loc_lng,
+        count_time = int(((datetime.datetime.now() - user.time).total_seconds()) / 3600)
+        result[user.id] = {'name': user.name, 'time': count_time, 'pic': user.pic, 'loc_lng': user.loc_lng,
                            'loc_lat': user.loc_lat}
     session.close()
     return result

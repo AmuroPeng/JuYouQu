@@ -30,6 +30,7 @@ def login():
             session['lng'], session['lat'] = module.search_user_get_loc(username)  # 并且更新了时间
             session['id'] = module.search_user_get_id(username)
             session['username'] = username
+            print(session['lng'])
             return redirect('/')
         else:
             flash('用户名或密码错误')
@@ -76,29 +77,37 @@ def index():
 def make_group():
     if request.method == 'GET':
         if 'username' in session.keys():
-            friend_dict = module.search_friend_get_dict(session['username'])
+            friend_dict = module.search_friend_get_dict(session['id'])
+            print(json.dumps(friend_dict))
             return render_template('make_group.html', result=json.dumps(friend_dict))  # 没把dict传到前端呢还
         else:
             return redirect('/login')
 
     elif request.method == 'POST':
-        friend_dict = {}  # 用于每次重新添加列表时清空上次记录
-        data = json.loads(str(request.get_data(), encoding="UTF-8"))  # 需要传回来的是勾选的id的dict
-        print(data)
-        friend_loc = []
-        for i in data:
-            friend_loc.append([friend_dict[i]['loc_lng'], friend_dict[i]['loc_lat']])
-        friend_loc.append(session['lng'], session['lat'])  # 计算总用时需要加上自己的坐标
-        result = module.search_shop_get_list(friend_loc)  # 传回来的是shop_id的list
-        session['shop_list'] = result
-        return redirect('/location')
+        if 'username' in session.keys():
+            data = json.loads(str(request.get_data(), encoding="UTF-8"))  # 需要传回来的是勾选的id的dict
+            print(data)
+            friend_loc = []
+            if data == '':
+                flash('请选择至少1个好友')
+            else:
+                for i, j in data.items():
+                    print(j)
+                    friend_loc.append([j['loc_lng'], j['loc_lat']])
+                friend_loc.append([session['lng'], session['lat']])  # 计算总用时需要加上自己的坐标
+                print(friend_loc)
+                result = module.search_shop_get_list(friend_loc)  # 传回来的是shop_id的list
+                session['shop_list'] = result
+                return redirect('/location')
+        else:
+            return redirect('/login')
 
 
 @app.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'GET':
-
-        return render_template('location.html', result='none')
+        session['shop_list'] = [12, 2, 3, 5]
+        return render_template('test.html', result=session['shop_list'])
 
 
 if __name__ == '__main__':

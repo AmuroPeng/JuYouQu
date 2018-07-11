@@ -1,52 +1,16 @@
 <html>
 
 <head>
-    <title>newtest</title>
-    <meta charset="utf-8" />
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-    <!-- <script src="jquery-3.3.1.js"></script> -->
-    <style>
-        #formid {
-            width: 50%;
-            margin-left: 25%;
-            margin-right: auto;
-            margin-top: 50px;
-        }
-
-        .displayfrd {
-            width: 45%;
-            float: left;
-            margin-top: 30px;
-            margin-left: 15px;
-        }
-
-        .subfrdinfo {
-            padding: 0 5px;
-        }
-
-        #sbmt {
-            margin-top: 200px;
-            float: left;
-            margin-left: 10%;
-        }
-    </style>
+    <title>！！测试！！</title>
+    <meta charset="utf-8">
     <script>
-
-        var a = '{{result|safe}}';
-        alert(a)
-
+        var r = '{{result|safe}}';
+        alert(r)
     </script>
 </head>
 
 <body>
-    <h1 style="text-align: center;background-color: darkcyan">选择好友{{result}}</h1>
-    <form id="formid">
-        <script>
-            $("#formid").append("<div class='displayfrd'><fieldset><legend><input type='checkbox'/>PYinfo</legend><div class='subfrdinfo'><p>zhang3</p><p>zhangsaninfo</p></div></fieldset></div>");
-            $("#formid").append("<div class='displayfrd'><fieldset><legend><input type='checkbox'/>PYinfo</legend><div class='subfrdinfo'><p>zhang3</p><p>zhangsaninfo</p></div></fieldset></div>");
-        </script>
-        <input id="sbmt" type="submit" value="创建聚会名单">
-    </form>
+    {{result|safe}}
 </body>
 
 </html>
