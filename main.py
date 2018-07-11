@@ -79,7 +79,7 @@ def make_group():
         if 'username' in session.keys():
             friend_dict = module.search_friend_get_dict(session['id'])
             print(json.dumps(friend_dict))
-            return render_template('test.html', result=json.dumps(friend_dict))  # 没把dict传到前端呢还
+            return render_template('make_group.html', result=json.dumps(friend_dict))  # 没把dict传到前端呢还
         else:
             return redirect('/login')
 
@@ -106,7 +106,8 @@ def make_group():
 @app.route('/location', methods=['GET', 'POST'])
 def location():
     if request.method == 'GET':
-        return render_template('location.html', result='none')
+        session['shop_list'] = [12, 2, 3, 5]
+        return render_template('test.html', result=session['shop_list'])
 
 
 if __name__ == '__main__':
