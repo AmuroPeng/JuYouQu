@@ -7,12 +7,17 @@ import sqlalchemy
 from PIL import Image
 import json
 import requests
+import SpatialRelaiton
+from pos_generation import get_loc
+from pos_generation import get_navi
 
 # 导入:
 from sqlalchemy import Column, String, create_engine, Float, DateTime, func, Integer
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
+
+length = 100
 
 # 创建对象的基类:
 Base = declarative_base()
@@ -31,9 +36,9 @@ class User(Base):
     id = Column(String(length), primary_key=True)
     name = Column(String(length))
     password = Column(String(length))
-    pic_id = Column(Integer)
-    loc_longitude = Column(Float)
-    loc_latitude = Column(Float)
+    pic = Column(String(length))
+    loc_lng = Column(Float)
+    loc_lat = Column(Float)
     time = Column(DateTime, default=datetime.datetime.now)
 
 
@@ -44,12 +49,12 @@ class Shop(Base):
     id = Column(String(length), primary_key=True)
     name = Column(String(length))
     address = Column(String(length))
-    loc_longitude = Column(Float)
-    loc_latitude = Column(Float)
+    loc_lng = Column(Float)
+    loc_lat = Column(Float)
     evaluate = Column(Float)
     introduction = Column(String(length))
     category = Column(String(length))
-    path = Column(String(length))
+    pic = Column(String(length))
 
 
 class Friend(Base):
@@ -57,7 +62,7 @@ class Friend(Base):
     __tablename__ = 'friend'
 
     id_1 = Column(String(length), primary_key=True)
-    id_2 = Column(String(length))
+    id_2 = Column(String(length), primary_key=True)
 
 
 class Feature(Base):
@@ -73,7 +78,7 @@ class Order(Base):
     __tablename__ = 'Order'
 
     id = Column(String(length), primary_key=True)
-    # user_id = Column(String(20))
+    # user_id = Column(String(length))
     shop_id = Column(String(length))
     evaluate = Column(Float)
     time = Column(DateTime, default=datetime.datetime.now)
@@ -94,21 +99,22 @@ engine = create_engine('mysql+mysqlconnector://root:19961105@localhost:3306/test
 DBSession = sessionmaker(bind=engine)
 
 
-def add_user(name, password, pic_id, loc_longitude, loc_latitude):
+def add_user(name, password, pic, loc_lng, loc_lat):
     session = DBSession()
-    new_id = session.query(func.count(User.id)).scalar()+1
-    new_user = User(id=new_id, name=name, password=password, pic_id=pic_id,
-                    loc_longitude=loc_longitude, loc_latitude=loc_latitude)
+    new_id = session.query(func.count(User.id)).scalar() + 1
+    new_user = User(id=new_id, name=name, password=password, pic=pic,
+                    loc_lng=loc_lng, loc_lat=loc_lat)
     session.add(new_user)
     session.commit()
     session.close()
+    return new_id
 
 
-def add_shop(name, address, loc_longitude, loc_latitude, evaluate, introduction, category, path_):
+def add_shop(name, address, loc_lng, loc_lat, evaluate, introduction, category, pic):
     session = DBSession()
-    new_id = session.query(func.count(Shop.id)).scalar()+1
-    new_shop = Shop(id=new_id, name=name, address=address, loc_longitude=loc_longitude, loc_latitude=loc_latitude,
-                    evaluate=evaluate, introduction=introduction, category=category, path=path_)
+    new_id = session.query(func.count(Shop.id)).scalar() + 1
+    new_shop = Shop(id=new_id, name=name, address=address, loc_lng=loc_lng, loc_lat=loc_lat,
+                    evaluate=evaluate, introduction=introduction, category=category, pic=pic)
     session.add(new_shop)
     session.commit()
     session.close()
@@ -116,8 +122,10 @@ def add_shop(name, address, loc_longitude, loc_latitude, evaluate, introduction,
 
 def add_friend(id_1, id_2):
     session = DBSession()
-    new_friend = Friend(id_1=id_1, id_2=id_2)
-    session.add(new_friend)
+    new_friend_1 = Friend(id_1=id_1, id_2=id_2)
+    new_friend_2 = Friend(id_1=id_2, id_2=id_1)
+    session.add(new_friend_1)
+    session.add(new_friend_2)
     session.commit()
     session.close()
 
@@ -146,12 +154,10 @@ def add_participant(order_id, user_id):
     session.close()
 
 
-# # 建表操作
-Base.metadata.create_all(engine)
 # # 创建session对象:
 # session = DBSession()
 # # 创建新User对象:
-# new_user = User(id='5', name='Bob', password='123456', loc_longitude=1.1, loc_latitude=0.1)
+# new_user = User(id='5', name='Bob', password='123456', loc_lng=1.1, loc_lat=0.1)
 # # 添加到session:
 # session.add(new_user)
 # # 提交即保存到数据库:
@@ -171,31 +177,76 @@ Base.metadata.create_all(engine)
 # session.close()
 
 
-def get_loc(loc):
-    url = 'http://api.map.baidu.com/geocoder/v2/?address=' + loc + '&output=json&ak=cSyuRk9MlTh1GV7dUSNxeM8kyg8Vu9MV'
-    get_result = requests.get(url).json()
-    if get_result['status'] == 0:  # 服务器错误
-        json_result = get_result['result']
-        if json_result['level'] == 'UNKNOWN':
-            return "位置信息有误无法识别，请重新输入"
-        else:
-            return json_result['location']
-    else:
-        return "百度服务器错误暂时无法定位"
+def search_user_get_password(username):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    user = session.query(User).filter(User.name == username).one()
+    # 关闭Session:
+    session.close()
+    return user.password
+
+
+def search_user_get_loc(username):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    user = session.query(User).filter(User.name == username).one()
+    print(user.time)
+    user.time = datetime.datetime.now()
+    x = user.loc_lng
+    y = user.loc_lat
+    session.commit()
+    session.close()
+    return x, y
+
+
+def search_friend_get_dict(search_id):
+    session = DBSession()
+    list = session.query(Friend).filter(Friend.id_1 == search_id).all()
+    result = {}
+    for i in list:
+        user = session.query(User).filter(User.id == i.id_2).one()
+        result[user.id] = {'name': user.name, 'time': user.time, 'pic': user.pic, 'loc_lng': user.loc_lng,
+                           'loc_lat': user.loc_lat}
+    session.close()
+    return result
+
+
+def search_shop_get_list(friend_loc_list):
+    session = DBSession()
+    shop_list_all = session.query(Shop).all()
+    result = {}
+    i = 0
+    for shop in shop_list_all:
+        if SpatialRelaiton.isPolygonContainsPoint(friend_loc_list, [shop.loc_lng, shop.loc_lat]):
+            count = 0
+            for friend in friend_loc_list:
+                way, temp_count = get_navi(friend[0], friend[1], shop.loc_lng, shop.loc_lat)
+                count += temp_count
+            result[shop.id] = [count, way]
+            print(count, way)
+            # 还得做排序
+    return result
+
+    session.close()
+
+
+# def search_():
+#     # 创建Session:
+#     session = DBSession()
+#     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+#     user = session.query(User).filter(User.name == username).one()
+#     # 关闭Session:
+#     session.close()
+#     return user.loc_lng, user.loc_lat
 
 
 if __name__ == '__main__':
     num = 1
-    while(1):
-        name_ = input("enter shop name:")
-        address_ = input("enter shop address:")
-        result = get_loc(address_)
-        evaluate_ = input("enter shop evaluate:")
-        introduction_ = input("enter shop introduction:")
-        category_ = input("enter shop category:")
-        path = "/picture/"+str(num)+".jpg"
-        # print(name_, address_, result, evaluate_, introduction_, category_, path)
-        add_shop(name_, address_, result['lng'], result['lat'], evaluate_, introduction_, category_, path)
-        # num = num + 1
-    # s = Image.open("C:/Users/1996j/Desktop/1.jpg")
-    # s.show()
+    # 建表操作
+    # Base.metadata.create_all(engine)
+    x1, y1 = search_user_get_loc('111')
+    x2, y2 = search_user_get_loc('222')
+    x3, y3 = search_user_get_loc('333')
+    result = search_shop_get_list([[x1, y1], [x2, y2], [x3, y3]])
