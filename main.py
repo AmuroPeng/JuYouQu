@@ -7,12 +7,15 @@ import module
 import json
 import logging
 import pos_generation
+import SpatialRelaiton
 from sqlalchemy.orm import class_mapper
 
 app = Flask(__name__)
 app.secret_key = '111'
+
+
 # 全局变量
-friend_dict = {}  # 好友列表（包含位置）
+# friend_dict = {}  # 好友列表（包含位置）
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -66,18 +69,32 @@ def index():
 
 
 @app.route('/group/new', methods=['GET', 'POST'])
-def make_group(self):
+def make_group():
     if request.method == 'GET':
         if 'username' in session.keys():
-            self.friend_dict = module.search_friend_get_dict(session['username'])
-            return render_template('make_group.html', result=jsonify(self.friend_dict))  # 没把dict传到前端呢还
+            friend_dict = module.search_friend_get_dict(session['username'])
+            return render_template('make_group.html', result=json.dumps(friend_dict))  # 没把dict传到前端呢还
         else:
             return redirect('/login')
 
     elif request.method == 'POST':
-        self.friend_dict = {}  # 用于每次重新添加列表时清空上次记录
-        data = json.loads(str(request.get_data(), encoding="UTF-8"))
-        # 差算法
+        friend_dict = {}  # 用于每次重新添加列表时清空上次记录
+        data = json.loads(str(request.get_data(), encoding="UTF-8"))  # 需要传回来的是勾选的id的list
+        data = [2, 3]  # @@@测试用
+        friend_loc = []
+        for i in data:
+            friend_loc.append([friend_dict[i]['loc_lng'], friend_dict[i]['loc_lat']])
+        result = module.search_shop_get_list(friend_loc)
+        # 差算法 别忘了加自己的坐标
+
+
+@app.route('/test', methods=['GET', 'POST'])
+def test():
+    if request.method == 'GET':
+        dic = {'id': 1, 'name': 'djb'}
+        src = json.dumps(dic)
+        print(src)
+        return render_template('test.html',result=src)
 
 
 if __name__ == '__main__':

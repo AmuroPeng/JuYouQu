@@ -7,6 +7,9 @@ import sqlalchemy
 from PIL import Image
 import json
 import requests
+import SpatialRelaiton
+from pos_generation import get_loc
+from pos_generation import get_navi
 
 # 导入:
 from sqlalchemy import Column, String, create_engine, Float, DateTime, func, Integer
@@ -202,6 +205,25 @@ def search_friend_get_dict(search_id):
     return result
 
 
+def search_shop_get_list(friend_loc_list):
+    session = DBSession()
+    shop_list_all = session.query(Shop).all()
+    result = {}
+    i = 0
+    for shop in shop_list_all:
+        if SpatialRelaiton.isPolygonContainsPoint(friend_loc_list, [shop.loc_lng, shop.loc_lat]):
+            count = 0
+            for friend in friend_loc_list:
+                way, temp_count = get_navi(friend[0], friend[1], shop.loc_lng, shop.loc_lat)
+                count += temp_count
+            result[shop.id] = [count, way]
+            print(count, way)
+            # 还得做排序
+    return result
+
+    session.close()
+
+
 # def search_():
 #     # 创建Session:
 #     session = DBSession()
@@ -216,7 +238,7 @@ if __name__ == '__main__':
     num = 1
     # 建表操作
     # Base.metadata.create_all(engine)
-    # add_friend(1, 2)
-    # add_friend(1, 3)
-    result = search_friend_get_dict(1)
-    print(result)
+    x1, y1 = search_user_get_loc('111')
+    x2, y2 = search_user_get_loc('222')
+    x3, y3 = search_user_get_loc('333')
+    result = search_shop_get_list([[x1, y1], [x2, y2], [x3, y3]])
