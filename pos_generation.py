@@ -34,11 +34,11 @@ def get_navi(origin_lng, origin_lat, destination_lng, destination_lat):
         return routes, json_duration  # routes是行程规划,json_duration是用时（秒）
     else:
         print("百度服务器错误暂时无法定位")
-        return '百度服务器错误暂时无法定位', 99999
+        return '百度服务器错误暂时无法定位', 999999999
 
 
 if __name__ == '__main__':
-    print(get_navi(116.396, 39.93, 116.531, 39.54))
+    print(get_navi(116.396, 39.93, 116.396, 39.89))
 
 # if __name__ == '__main__':
 #     result = get_loc('北京')

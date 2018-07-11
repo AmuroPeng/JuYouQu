@@ -184,13 +184,22 @@ def search_user_get_loc(username):
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
     user = session.query(User).filter(User.name == username).one()
-    print(user.time)
     user.time = datetime.datetime.now()
     x = user.loc_lng
     y = user.loc_lat
     session.commit()
     session.close()
     return x, y
+
+
+def search_user_get_id(username):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    user = session.query(User).filter(User.name == username).one()
+    result_id = user.id
+    session.close()
+    return result_id
 
 
 def search_friend_get_dict(search_id):
@@ -208,6 +217,7 @@ def search_friend_get_dict(search_id):
 def search_shop_get_list(friend_loc_list):
     session = DBSession()
     shop_list_all = session.query(Shop).all()
+    session.close()
     result = {}
     i = 0
     for shop in shop_list_all:
@@ -216,12 +226,13 @@ def search_shop_get_list(friend_loc_list):
             for friend in friend_loc_list:
                 way, temp_count = get_navi(friend[0], friend[1], shop.loc_lng, shop.loc_lat)
                 count += temp_count
-            result[shop.id] = [count, way]
-            print(count, way)
-            # 还得做排序
-    return result
-
-    session.close()
+            if count < 1000000000:  # 如果报错查询不到的话，直接忽略
+                result[shop.id] = count
+    result_sorted = sorted(result.items(), key=lambda d: d[1])
+    result_list = []
+    for i in result_sorted:
+        result_list.append(int((list(i))[0]))
+    return result_list
 
 
 # def search_():
@@ -236,9 +247,10 @@ def search_shop_get_list(friend_loc_list):
 
 if __name__ == '__main__':
     num = 1
-    # 建表操作
-    # Base.metadata.create_all(engine)
+
     x1, y1 = search_user_get_loc('111')
     x2, y2 = search_user_get_loc('222')
     x3, y3 = search_user_get_loc('333')
-    result = search_shop_get_list([[x1, y1], [x2, y2], [x3, y3]])
+    x4, y4 = search_user_get_loc('444')
+    result = search_shop_get_list([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
+    print(result)
