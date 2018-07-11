@@ -8,3 +8,5 @@ __pycache__/
 *.pyc
 
 test_demo\.py
+
+test\.py

@@ -1,3 +1,4 @@
+# coding=utf8
 # -*- coding:utf-8 -*-
 
 from flask import Flask, render_template, flash, redirect, jsonify
@@ -27,6 +28,7 @@ def login():
         if password == module.search_user_get_password(username):
             print('密码正确')
             session['lng'], session['lat'] = module.search_user_get_loc(username)  # 并且更新了时间
+            session['id'] = module.search_user_get_id(username)
             session['username'] = username
             return redirect('/')
         else:
@@ -57,6 +59,8 @@ def signup():
             new_id = module.add_user(username, password, temp_pic_path, pos['lng'], pos['lat'])
             session['username'] = username
             session['id'] = new_id
+            session['lng'] = pos['lng']
+            session['lat'] = pos['lat']
             print('已注册新用户：' + username)
             return redirect('/')
     return render_template('signup.html', signup_form=signup_form)
@@ -79,22 +83,22 @@ def make_group():
 
     elif request.method == 'POST':
         friend_dict = {}  # 用于每次重新添加列表时清空上次记录
-        data = json.loads(str(request.get_data(), encoding="UTF-8"))  # 需要传回来的是勾选的id的list
-        data = [2, 3]  # @@@测试用
+        data = json.loads(str(request.get_data(), encoding="UTF-8"))  # 需要传回来的是勾选的id的dict
+        print(data)
         friend_loc = []
         for i in data:
             friend_loc.append([friend_dict[i]['loc_lng'], friend_dict[i]['loc_lat']])
-        result = module.search_shop_get_list(friend_loc)
-        # 差算法 别忘了加自己的坐标
+        friend_loc.append(session['lng'], session['lat'])  # 计算总用时需要加上自己的坐标
+        result = module.search_shop_get_list(friend_loc)  # 传回来的是shop_id的list
+        session['shop_list'] = result
+        return redirect('/location')
 
 
-@app.route('/test', methods=['GET', 'POST'])
-def test():
+@app.route('/location', methods=['GET', 'POST'])
+def location():
     if request.method == 'GET':
-        dic = {'id': 1, 'name': 'djb'}
-        src = json.dumps(dic)
-        print(src)
-        return render_template('test.html',result=src)
+
+        return render_template('location.html', result='none')
 
 
 if __name__ == '__main__':
