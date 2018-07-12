@@ -266,6 +266,17 @@ def search_shop_get_info_dict(id_list):
     return result
 
 
+def search_shop_get_info_list(id_list):
+    session = DBSession()
+    result = []
+    for i in id_list:
+        shop = session.query(Shop).filter(Shop.id == i).one()
+        result.append({'id': shop.id, 'name': shop.name, 'address': shop.address, 'evaluate': shop.evaluate,
+                       'category': shop.category, 'pic': shop.pic, 'introduction': shop.introduction})
+    session.close()
+    return result
+
+
 # def search_():
 #     # 创建Session:
 #     session = DBSession()
