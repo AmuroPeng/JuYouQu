@@ -1,12 +1,5 @@
 # -*- coding:utf-8 -*-
 
-import mysql
-import pymysql
-import mysql.connector
-import sqlalchemy
-from PIL import Image
-import json
-import requests
 import SpatialRelaiton
 from pos_generation import get_loc
 from pos_generation import get_navi
@@ -87,6 +80,9 @@ class Participant(Base):
 
 # 初始化数据库连接:
 engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test3')
+# 使用服务器时用此连接：
+# engine = create_engine('mysql+mysqlconnector://root:amuluo@127.0.0.1:3306/test3')
+
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 
@@ -282,6 +278,8 @@ def search_shop_get_info_dict(id_list):
 
 if __name__ == '__main__':
     num = 1
+    # 建表操作
+    # Base.metadata.create_all(engine)
 
     # x1, y1 = search_user_get_loc('111')
     # x2, y2 = search_user_get_loc('222')

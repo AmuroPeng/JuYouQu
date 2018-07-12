@@ -81,7 +81,7 @@ def make_group():
         if 'username' in session.keys():
             friend_list = module.search_friend_get_list(session['id'])
             print(friend_list)
-            return render_template('test.html', result=json.dumps(friend_list))
+            return render_template('make_group.html', result=json.dumps(friend_list))
             # friend_list格式：{id:{name:str,time:datetime,pic:str,loc_lng:float,loc_lat:float}
             # e.g.: {[ {"id":1, "loc_lng": 115.999, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "222", "loc_lat": 39.4825}, {"id":1, "loc_lng": 116.704, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "333", "loc_lat": 39.5186}]
         else:
