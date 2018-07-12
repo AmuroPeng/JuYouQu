@@ -58,18 +58,11 @@
 </script>
 <script>
     $("button").click(function() {
-        // alert('a');
-        // var bval = obj[0].name;
-        // var cval = obj[0].number;
-        // alert(bval);
-        // alert(cval);
         var j =  new Array();
         var groupCheckbox = $("input[name='same']");
         for (i = 0; i < groupCheckbox.length; i++) {
             if (groupCheckbox[i].checked) {
                 j.push((obj[i]))
-                // // var newstr = JSON.stringify(val);
-                {#alert(val);#}
                 }
             }
         alert(j)
@@ -77,6 +70,7 @@
         $.post('/group/new',
             data,
             function(){
+                window.location.href = '/location'
             });
     });
 </script>
