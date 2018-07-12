@@ -68,7 +68,7 @@ class Order(Base):
     shop_id = Column(String(length))
     evaluate = Column(Float)
     time = Column(DateTime, default=datetime.datetime.now)
-    suggest = Column(String(length))
+    suggest = Column(String(length))  # 存推荐内容
 
 
 class Participant(Base):
@@ -132,6 +132,18 @@ def add_order(o_id, shop_id, evaluate, suggest):
     session.add(new_order)
     session.commit()
     session.close()
+
+
+def add_participant_create_id(user_id):
+    session = DBSession()
+    print(session.query(func.count(Order.id)).scalar())
+    new_id = session.query(func.count(Order.id)).scalar() + 1
+    print(new_id)
+    new_participant = Participant(order_id=new_id, user_id=user_id)
+    session.add(new_participant)
+    session.commit()
+    session.close()
+    return new_id
 
 
 def add_participant(order_id, user_id):
@@ -201,6 +213,15 @@ def search_user_id_get_loc(user_id):
     return x, y
 
 
+def search_user_get_all(user_id):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    user = session.query(User).filter(User.id == user_id).one()
+    session.close()
+    return user
+
+
 def search_shop_get_loc(shop_id):
     session = DBSession()
     shop = session.query(Shop).filter(Shop.id == shop_id).one()
@@ -218,6 +239,19 @@ def search_user_get_id(username):
     result_id = user.id
     session.close()
     return result_id
+
+
+def search_user_get_order_list(user_id):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    users = session.query(Participant).filter(Participant.user_id == user_id).all()
+    result = []
+    for user in users:
+        results = session.query(Order).filter(Order.id == user.order_id).one()
+        result.append({'id': results.id, 'content': results.suggestion})
+    session.close()
+    return result
 
 
 def search_friend_get_list(search_id):
@@ -299,4 +333,18 @@ if __name__ == '__main__':
     # result = search_shop_get_id_list([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
     # print(result)
 
-    print(search_shop_get_info_dict([12, 2, 3, 5]))
+    # print(search_shop_get_info_dict([12, 2, 3, 5]))
+
+    # add_order(1, 2, 3, '特别好')
+    # add_order(2, 3, 5, '特别不好')
+    # add_order(3, 4, 1, '特别好')
+    #
+    # add_participant(1, 1)
+    # add_participant(1, 2)
+    # add_participant(1, 3)
+    # add_participant(2, 1)
+    # add_participant(2, 2)
+    # add_participant(3, 2)
+    # add_participant(3, 3)
+
+    print(add_participant_create_id(2))
