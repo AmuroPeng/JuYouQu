@@ -77,6 +77,8 @@ def index():
 def make_group():
     session['id'] = 1  # 测试用
     session['username'] = '111'  # 测试用
+    session['lng'] = 116.162
+    session['lat'] = 40.5355
     if request.method == 'GET':
         if 'username' in session.keys():
             friend_list = module.search_friend_get_list(session['id'])
@@ -88,6 +90,7 @@ def make_group():
             return redirect('/login')
 
     elif request.method == 'POST':
+        print('收到post')
         if 'username' in session.keys():
             data = json.loads(str(request.get_data(), encoding="UTF-8"))
             # 需要传回来的是勾选的id的dict,格式同friend_dict
@@ -97,9 +100,9 @@ def make_group():
             if data == {}:
                 flash('请选择至少1个好友')
             else:
-                for i, j in data.items():
-                    friend_loc.append([j['loc_lng'], j['loc_lat']])
-                    friend_id.append(int(i))
+                for i in data:
+                    friend_loc.append([i['loc_lng'], i['loc_lat']])
+                    friend_id.append(i['id'])
                 friend_loc.append([session['lng'], session['lat']])  # 计算总用时需要加上自己的坐标
                 friend_id.append(session['id'])
                 result = module.search_shop_get_id_list(friend_loc)  # 传回来的是shop_id的list 格式：[id1,id2,id3]
