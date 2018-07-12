@@ -232,15 +232,15 @@ def search_user_get_id(username):
     return result_id
 
 
-def search_friend_get_dict(search_id):
+def search_friend_get_list(search_id):
     session = DBSession()
     list = session.query(Friend).filter(Friend.id_1 == search_id).all()
-    result = {}
+    result = []
     for i in list:
         user = session.query(User).filter(User.id == i.id_2).one()
         count_time = int(((datetime.datetime.now() - user.time).total_seconds()) / 3600)
-        result[user.id] = {'name': user.name, 'time': count_time, 'pic': user.pic, 'loc_lng': user.loc_lng,
-                           'loc_lat': user.loc_lat}
+        result.append({'id': user.id, 'name': user.name, 'time': count_time, 'pic': user.pic,
+                       'loc_lng': user.loc_lng, 'loc_lat': user.loc_lat})
     session.close()
     return result
 
