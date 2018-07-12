@@ -1,7 +1,7 @@
 # coding=utf8
 # -*- coding:utf-8 -*-
 
-from flask import Flask, render_template, flash, redirect, jsonify
+from flask import Flask, render_template, flash, redirect, jsonify, url_for
 from flask import request, session
 import form
 import module
@@ -102,16 +102,16 @@ def make_group():
             else:
                 for i in data:
                     friend_loc.append([i['loc_lng'], i['loc_lat']])
-                    friend_id.append(i['id'])
+                    friend_id.append(int(i['id']))
                 friend_loc.append([session['lng'], session['lat']])  # 计算总用时需要加上自己的坐标
                 friend_id.append(session['id'])
                 result = module.search_shop_get_id_list(friend_loc)  # 传回来的是shop_id的list 格式：[id1,id2,id3]
                 session['shop_list'] = result
                 session['people_list'] = friend_id
                 print(session['people_list'])
-                return redirect('/location')
+                return redirect("location")
         else:
-            return redirect('/login')
+            return redirect('login')
 
 
 @app.route('/location', methods=['GET', 'POST'])
@@ -164,6 +164,29 @@ def shop():
             print(result_dic)
             return json.dumps(result_dic)
             # result_dic格式: {user_id:['location','time(单位秒)'],user_id:['location','time(单位秒)']}
+        else:
+            return redirect('/login')
+
+
+@app.route('/welcome', methods=['GET', 'POST'])
+def welcome():
+    session['username'] = '111'  # 测试用
+    session['shop_list'] = [12, 2, 3, 5]  # 测试用
+    if request.method == 'GET':
+        if 'username' in session.keys():
+            result = module.search_shop_get_info_dict(session['shop_list'])
+            return render_template('test.html', result=json.dumps(result))
+            # result格式：{'id':int, 'name': str, 'address': atr, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
+        else:
+            return redirect('/login')
+    if request.method == 'POST':
+        if 'username' in session.keys():
+            data = json.loads(str(request.get_data(), encoding="UTF-8"))
+            # 需要传回来的是商铺的id 如：{id:3}或{id:10}
+            print(data)
+            path_str = '/shop?id=' + str(data['id'])
+            print(path_str)
+            return redirect(path_str)
         else:
             return redirect('/login')
 
