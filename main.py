@@ -31,7 +31,7 @@ def login():
             session['id'] = module.search_user_get_id(username)
             session['username'] = username
             print(session['lng'])
-            return redirect('index')
+            return redirect('/')
         else:
             flash('用户名或密码错误')
     return render_template('login.html', login_form=login_form)
@@ -69,14 +69,24 @@ def signup():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    # return '哈罗 World~'
-    return render_template('index.html')  # , username=session['username'] 目前不能加，因为没登录，没有username
+    if request.method == 'GET':
+        if 'username' not in session.keys():
+            return redirect('welcome')
+        return render_template('index.html')  # 用{{username}}代替右上角的用户名
+    if request.method == 'POST':
+        if 'username' in session.keys():
+            data = (str(request.get_data(), encoding="UTF-8"))
+            # 需要传回来的是的请求搜索的内容 如：{str:'麦当劳'}
+            print(data)
+            # 需要补另一个线
+        else:
+            return redirect('login')
 
 
 @app.route('/group/new', methods=['GET', 'POST'])
 def make_group():
-    session['id'] = 1  # 测试用
-    session['username'] = '111'  # 测试用
+    # session['id'] = 1  # 测试用
+    # session['username'] = '111'  # 测试用
     session['lng'] = 116.162
     session['lat'] = 40.5355
     if request.method == 'GET':
@@ -113,39 +123,42 @@ def make_group():
 
 @app.route('/location', methods=['GET', 'POST'])
 def location():
-    session['username'] = '111'  # 测试用
-    session['shop_list'] = [12, 2, 3, 5]  # 测试用
+    # session['username'] = '111'  # 测试用
+    # session['shop_list'] = [12, 2, 3, 5]  # 测试用
     if request.method == 'GET':
         if 'username' in session.keys():
-            result = module.search_shop_get_info_dict(session['shop_list'])
+            result = module.search_shop_get_info_list(session['shop_list'])
             print(result)
-            return render_template('test.html', result=json.dumps(result))
+            return render_template('location.html', result=json.dumps(result))
             # result格式：{'id':int, 'name': str, 'address': atr, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
         else:
             return redirect('login')
     if request.method == 'POST':
         if 'username' in session.keys():
-            data = json.loads(str(request.get_data(), encoding="UTF-8"))
+            data = (str(request.get_data(), encoding="UTF-8"))
+            # data = int(data)
             # 需要传回来的是商铺的id 如：{id:3}或{id:10}
-            print(data)
-            return redirect(url_for('shop', id=data['id']))  # 相当于url为'/shop?id=5'
+            data = int(data.strip('"'))
+            print(url_for('shop', id=data))
+            return str(url_for('shop', id=data))
         else:
             return redirect('login')
 
 
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
-    session['username'] = '111'  # 测试用
-    session['people_list'] = [1, 2, 3]  # 测试用
+    # session['username'] = '111'  # 测试用
+    # session['people_list'] = [1, 2, 3]  # 测试用
     session['shop_info'] = {'id': 5, 'name': '北京麦当劳潘家园餐厅', 'address': '北京市朝阳区劲松北路2号楼', 'evaluate': 5.0,
                             'category': '美食', 'pic': '/picture/0.jpg', 'introduction': '空空如也'}  # 测试用
     if request.method == 'GET':
         if 'username' in session.keys():
             get_id = request.args.get('id')
-            result = module.search_shop_get_info_dict([get_id])  # 只对选中的一个shop赋值
-            session['shop_info'] = result[get_id]  # 获取到id为get_id的value并赋值
-            return render_template('test.html', result=json.dumps(session['shop_info']))
-            # session['shop_info']格式：{'name': str, 'address': str, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
+            result = module.search_shop_get_info_list([get_id])  # 只对选中的一个shop赋值
+            print(result)
+            session['shop_info'] = result  # 获取到id为get_id的value并赋值
+            return render_template('shop.html', result=json.dumps(session['shop_info']))
+            # session['shop_info']格式：{'id':int, 'name': str, 'address': str, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
             # 如:{'name':'北京麦当劳潘家园餐厅','address':'北京市朝阳区劲松北路2号楼','evaluate':5.0,'category': '美食','pic': '/picture/0.jpg','introduction':'空空如也'}
         else:
             return redirect('login')
@@ -168,19 +181,8 @@ def shop():
 def welcome():
     if request.method == 'GET':
         if 'username' in session.keys():
-            return redirect('login')
-        else:
-            return render_template('welcome.html')
-    if request.method == 'POST':
-        if 'username' in session.keys():
-            data = json.loads(str(request.get_data(), encoding="UTF-8"))
-            # 需要传回来的是商铺的id 如：{id:3}或{id:10}
-            print(data)
-            path_str = '/shop?id=' + str(data['id'])
-            print(path_str)
-            return redirect(path_str)
-        else:
-            return redirect('login')
+            return redirect('/')
+    return render_template('welcome.html')
 
 
 if __name__ == '__main__':

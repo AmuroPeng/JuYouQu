@@ -1,1269 +1,276 @@
+<!DOCTYPE html>
 <html lang="en"><head>
     <meta charset="UTF-8">
     <title>location</title>
-    <link href="location/css/loc-reset.css" rel="stylesheet">
+    <!-- <link href="location/css/loc-reset.css" rel="stylesheet">
     <link href="location/css/loc-font-awesome.min.css" rel="stylesheet">
-    <link href="location/css/loc-style.css" rel="stylesheet">
+    <link href="location/css/loc-style.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='location/css/loc-reset.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='location/css/loc-font-awesome.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='location/css/loc-style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <!-- <script>
+        var obj = [{"name":"麦当劳","address":"朝阳区平乐园了自己佛那个骷髅三等功","introduction":"10-16","category":"美食"},{"name":"肯德基1","address":"丰台区1","introduction":"1","category":"美食1"}
+        ,{"name":"肯德基2","address":"丰台区2","introduction":"10-202","category":"美食2"} ,{"name":"肯德基3","address":"丰台区3","introduction":"10-203","category":"美食3"}
+        ,{"name":"肯德基4","address":"丰台区4","introduction":"10-204","category":"美食4"} ,{"name":"肯德基5","address":"丰台区5","introduction":"10-205","category":"美食5"}]
+    </script> -->
+    <script>
+        var r=`{{result|safe}}`
+        var obj=JSON.parse(r);
+
+    </script>
 </head>
 <body>
-   
+
+   <style type="text/css">
+    html{
+    overflow-x: hidden;
+    overflow-y: hidden;
+        }
+    </style>
     <!--top-main-->
     <div class="top-main">
-       <a href="index.html"> <img src="location/img/BackupUI/ju_logo.png"> </a>
+       <a href="index.html"> <img src="{{ url_for('static', filename='location/img/BackupUI/ju_logo.png') }}" style="float:left"> </a>
         <div class="search-wrapper">
-            <div class="search-box">
-                <input class="search-in" type="text" placeholder="    搜索去哪里玩">
-                <input class="search-but" type="button" value="搜索">
-                <div ></div>
-            </div>
-            <a class="a-float-left hight-search" href="#">高级<br>搜索</a> &emsp;
-            <a class="a-float-right hight-search button" href="home.html">个人<br>中心</a>
+            <a class="a-float-right hight-search button" href="person page.html">个人<br>中心</a>
             <!--other-search-->
-            <div class="other-search">
-                <a href="#">欢乐谷</a>
-                <a href="#">水魔方</a>
-                <a href="#">比萨</a>
-                <a href="#">烤肉</a>
-                <a href="#">炸鸡</a>
-                <a href="#">小吃</a>
-                <a href="#">KTV</a>
-                <a href="#">狼人杀</a>
-                <a class="more-other" href="#">更多<i class="fa fa-angle-right"></i></a>
-            </div>
         </div>
         <!--two-code-->
-        
+
     </div>
     <!--content-top-->
-    
-    <!--main-->
-    <div class="sub-nav">
-        <input class="more-btn" type="button" value="更多">
-        <!--sub-nav-cell-->
-        <div class="sub-nav-cell">
-            <h3 class="orange">美食</h3>
-            <ul class="sub-nav-box">
-                <li><a href="#">炸鸡</a></li>
-                <li><a href="#">烤肉</a></li>
-                <li><a href="#">家常菜</a></li>
-                <li><a href="#">火锅</a></li>
-                <li><a href="#">日式料理</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </div>
-        <div class="sub-nav-cell">
-            <h3 class="green-sp">休闲</h3>
-            <ul class="sub-nav-box sp">
-                <li><a href="#">商场</a></li>
-                <li><a href="#">水魔方</a></li>
-                <li><a href="#">欢乐谷</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-
-            </ul>
-        </div>
-        <div class="sub-nav-cell">
-            <h3 class="red-now">体育活动</h3>
-            <ul class="sub-nav-box now">
-                <li><a href="#">台球</a></li>
-                <li><a href="#">篮球</a></li>
-                <li><a href="#">羽毛球</a></li>
-                <li><a href="#">乒乓球</a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-                <li><a href="#"> </a></li>
-
-            </ul>
-        </div>
-        <div class="sub-nav-cell">
-            <h3 class="blue-more">娱乐活动</h3>
-            <ul class="sub-nav-box more">
-                <li><a href="#">狼人杀</a></li>
-                <li><a href="#">阿瓦隆</a></li>
-                <li><a href="#">三国杀</a></li>
-                <li><a href="#">大富翁</a></li>
-                <li><a href="#">飞行棋</a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-                <li><a href="#"></a></li>
-            </ul>
-        </div>
-    </div>
-    <!--main-->
-    <div class="main">
+        <!--main-->
+    <div class="main" >
+        <!-- firstshop -->
         <div class="main">
             <div class="main-title">
-                <h1>店铺信息<span class="show-title">总有一款适合您</span></h1>
+                <h1>店铺信息</h1>
             </div>
-            <div class="product-box">
+            <div class="product-box" id="main_1">
                 <div class="inner-info">
                     <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
                     </div>
                     <div class="inner-left">
-                       <a href="shop.html"> <img src="location/img/show1.png"></a>
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
+                       <img id="pic1" src="location/img/show1.png">
+                        <h1 id="name1">北京麦当劳<a href="#"></a></h1>
+                        <span id="cat1">美食</span>
                     </div>
                     <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="location/img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="location/img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
+
                         <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
+                            <tbody><tr><td>营业时间</td>
+                                <td id="intro1"></td>
                             </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
+                            <tr><td>所在地址</td>
+                                <td id="loc1"></td>
                             </tr>
                         </tbody></table>
                     </div>
                 </div>
             </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="location/img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="location/img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="location/img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
+        <script>
+            document.getElementById("name1").innerHTML = obj[0].name;
+            document.getElementById("cat1").innerHTML = obj[0].category;
+            document.getElementById("intro1").innerHTML = obj[0].introduction;
+            document.getElementById("loc1").innerHTML = obj[0].address;
+            document.getElementById("pic1").src="location/img/BackupUI/ju_logo.png";
+            $('#main_1').click(function () {
+                var data =JSON.stringify(obj[0].id);
+                $.post('/location',
+                        data,
+                        function(n){
+                window.location.href = n;});
+     });
+        </script>
+        <!-- 2shop -->
+<div class="main"  >
+
+        <div class="product-box" id="main-2">
+            <div class="inner-info">
+                <div>
                 </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="location/img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="location/img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="location/img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
+                <div class="inner-left">
+                    <img id="pic2" src="location/img/show1.png">
+                    <h1 id="name2">北京麦当劳<a href="#"></a></h1>
+                    <span id="cat2">美食</span>
                 </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="location/img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="location/img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="location/img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="location/img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="location/img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="location/img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <!--
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
-                </div>
-            </div>
-            <div class="product-box">
-                <div class="inner-info">
-                    <div>
-                        <span class="line-f40">|</span>
-                        <span class="text-title">女人爱搭配</span>
-                        <span class="share-weitao" style="display: none;">
-                            <span class="line-f40">+</span>
-                            <a href="#">关注到微淘</a>
-                        </span>
-                    </div>
-                    <div class="inner-left">
-                        <img src="img/show1.png">
-                        <h1><a href="#">有到一年雪绒坊</a></h1>
-                        <span>优雅的温柔</span>
-                    </div>
-                    <div class="inner-right">
-                        <div>
-                            <a href="#">
-                                <img src="img/shooes.jpg">
-                                <p>春夏美鞋</p>
-                            </a>
-                            <a href="#">
-                                <img src="img/c.gif">
-                                <p>春季亮色搭</p>
-                            </a>
-                        </div>
-                        <table class="tab-inner">
-                            <tbody><tr><td><a href="#">潮流女装</a></td>
-                                <td><a href="#">小个子美搭</a></td>
-                            </tr>
-                            <tr><td><a href="#">胖MM显廋</a></td>
-                                <td><a href="#">复古多包袋</a></td>
-                            </tr>
-                        </tbody></table>
-                    </div>
+                <div class="inner-right">
+
+                    <table class="tab-inner">
+                        <tbody><tr><td>营业时间</td>
+                            <td id="intro2"></td>
+                        </tr>
+                        <tr><td>所在地址</td>
+                            <td id="loc2"></td>
+                        </tr>
+                    </tbody></table>
                 </div>
             </div>
         </div>
-    -->
-    </div>
-    <!--main-bottom-->
-    
-    <!--ad-->
-    
-    <!--help-->
-    
-    <!--footer-->
-    
+    <script>
+        document.getElementById("name2").innerHTML = obj[1].name;
+        document.getElementById("cat2").innerHTML = obj[1].category;
+        document.getElementById("intro2").innerHTML = obj[1].introduction;
+        document.getElementById("loc2").innerHTML = obj[1].address;
+        document.getElementById("pic2").src="location/img/BackupUI/ju_logo.png";
+        $(document).ready(function(){
+            $('#main-2').click(function () {
+                window.location.href="shop.html";//跳转
+    });
+ });
+    </script>
 
-    <!--backtoTop1-->
-    <!--兼容所有现代浏览器同时包括 ie6/7/8/9 （ie6会有一点点抖动）-->
-   <!-- <div class="backtoTop" id="backToTop1" style="top: 1406px;">
-        <div class="up-back" id="backToTop-up"><i class="fa fa-angle-up"></i></div>
-        <div class="down-back" id="backToTop-down"><i class="fa fa-angle-down"></i></div>
-    </div>
--->
+    <!-- 3shop -->
+<div class="main"  >
 
+        <div class="product-box" id="main-3">
+            <div class="inner-info">
+                <div>
+                </div>
+                <div class="inner-left">
+                   <a href="shop.html"> <img id="pic3" src="location/img/show1.png"></a>
+                    <h1 id="name3">北京麦当劳<a href="#"></a></h1>
+                    <span id="cat3">美食</span>
+                </div>
+                <div class="inner-right">
+
+                    <table class="tab-inner">
+                        <tbody><tr><td>营业时间</td>
+                            <td id="intro3"></td>
+                        </tr>
+                        <tr><td>所在地址</td>
+                            <td id="loc3"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.getElementById("name3").innerHTML = obj[2].name;
+        document.getElementById("cat3").innerHTML = obj[2].category;
+        document.getElementById("intro3").innerHTML = obj[2].introduction;
+        document.getElementById("loc3").innerHTML = obj[2].address;
+        document.getElementById("pic3").src="location/img/BackupUI/ju_logo.png";
+        $(document).ready(function(){
+            $('#main-3').click(function () {
+                window.location.href="shop.html";//跳转
+    });
+ });
+    </script>
+
+    <!-- 4shop -->
+<div class="main"  >
+
+        <div class="product-box" id="main-4">
+            <div class="inner-info">
+                <div>
+                </div>
+                <div class="inner-left">
+                   <a href="shop.html"> <img id="pic4" src="location/img/show1.png"></a>
+                    <h1 id="name4">北京麦当劳<a href="#"></a></h1>
+                    <span id="cat4">美食</span>
+                </div>
+                <div class="inner-right">
+
+                    <table class="tab-inner">
+                        <tbody><tr><td>营业时间</td>
+                            <td id="intro4"></td>
+                        </tr>
+                        <tr><td>所在地址</td>
+                            <td id="loc4" height="10px"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.getElementById("name4").innerHTML = obj[3].name;
+        document.getElementById("cat4").innerHTML = obj[3].category;
+        document.getElementById("intro4").innerHTML = obj[3].introduction;
+        document.getElementById("loc4").innerHTML = obj[3].address;
+        document.getElementById("pic4").src="location/img/BackupUI/ju_logo.png";
+        $(document).ready(function(){
+            $('#main-4').click(function () {
+                window.location.href="shop.html";//跳转
+    });
+ });
+    </script>
+
+    <!-- 5shop -->
+<div class="main"  >
+        <div class="product-box" id="main-5">
+            <div class="inner-info">
+                <div>
+                </div>
+                <div class="inner-left">
+                   <a href="shop.html"> <img id="pic5" src="location/img/show1.png"></a>
+                    <h1 id="name5">北京麦当劳<a href="#"></a></h1>
+                    <span id="cat5">美食</span>
+                </div>
+                <div class="inner-right">
+
+                    <table class="tab-inner">
+                        <tbody><tr><td>营业时间</td>
+                            <td id="intro5"></td>
+                        </tr>
+                        <tr><td>所在地址</td>
+                            <td id="loc5"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.getElementById("name5").innerHTML = obj[4].name;
+        document.getElementById("cat5").innerHTML = obj[4].category;
+        document.getElementById("intro5").innerHTML = obj[4].introduction;
+        document.getElementById("loc5").innerHTML = obj[4].address;
+        document.getElementById("pic5").src="location/img/BackupUI/ju_logo.png";
+        $(document).ready(function(){
+            $('#main-5').click(function () {
+                window.location.href="shop.html";//跳转
+    });
+ });
+    </script>
+
+    <!-- 6shop -->
+<div class="main"  >
+        <div class="product-box" id="main-6">
+            <div class="inner-info">
+                <div>
+                </div>
+                <div class="inner-left">
+                   <a href="shop.html"> <img id="pic6" src="location/img/show1.png"></a>
+                    <h1 id="name6">北京麦当劳<a href="#"></a></h1>
+                    <span id="cat6">美食</span>
+                </div>
+                <div class="inner-right">
+
+                    <table class="tab-inner">
+                        <tbody><tr><td>营业时间</td>
+                            <td id="intro6"></td>
+                        </tr>
+                        <tr><td>所在地址</td>
+                            <td id="loc6"></td>
+                        </tr>
+                    </tbody></table>
+                </div>
+            </div>
+        </div>
+    <script>
+        document.getElementById("name6").innerHTML = obj[5].name;
+        document.getElementById("cat6").innerHTML = obj[5].category;
+        document.getElementById("intro6").innerHTML = obj[5].introduction;
+        document.getElementById("loc6").innerHTML = obj[5].address;
+        document.getElementById("pic6").src="location/img/BackupUI/ju_logo.png";
+        $(document).ready(function(){
+            $('#main-6').click(function () {
+                window.location.href="shop.html";//跳转
+    });
+ });
+    </script>
+
+    </div>
     <script src="js/jquery_1.9.js"></script>
     <script src="js/main.js"></script>
     <script src="js/img-show.js"></script>
