@@ -139,42 +139,62 @@ def location():
 
 @app.route('/shop', methods=['GET', 'POST'])
 def shop():
-    # session['username'] = '111'  # 测试用
-    # session['people_list'] = [1, 2, 3]  # 测试用
-    # session['shop_info'] = {'id': 5, 'name': '北京麦当劳潘家园餐厅', 'address': '北京市朝阳区劲松北路2号楼', 'evaluate': 5.0,
-    #                         'category': '美食', 'pic': '/picture/0.jpg', 'introduction': '空空如也'}  # 测试用
-    if request.method == 'GET':
-        if 'username' in session.keys():
-            get_id = request.args.get('id')
-            result = module.search_shop_get_info_list([get_id])  # 只对选中的一个shop赋值
-            print(result)
-            session['shop_info'] = result  # 获取到id为get_id的value并赋值
-            return render_template('shop.html', result=json.dumps(session['shop_info'][0]))
+    session['username'] = '111'  # 测试用
+    session['people_list'] = [1, 2, 3]  # 测试用
+    session['shop_info'] = {'id': 5, 'name': '北京麦当劳潘家园餐厅', 'address': '北京市朝阳区劲松北路2号楼', 'evaluate': 5.0,
+                            'category': '美食', 'pic': '/picture/0.jpg', 'introduction': '空空如也'}  # 测试用
+    if 'username' in session.keys():
+        get_id = request.args.get('id')
+        result = module.search_shop_get_info_list([get_id])  # 只对选中的一个shop赋值
+        print(result)
+        result_dic = {}
+        x2, y2 = module.search_shop_get_loc(session['shop_info']['id'])
+        # order_id = module.add_participant_create_id(session['id'])
+        for people_id in session['people_list']:
+            x1, y1 = module.search_user_id_get_loc(people_id)
+            count, destination = pos_generation.get_navi(x1, y1, x2, y2)
+            result_dic[people_id] = [count, destination]
+            # if people_id != session['id']:
+            #     module.add_participant(order_id, people_id)
+        print(result_dic)
+        all_result = [result[0], result_dic]
+        session['shop_info'] = all_result  # 获取到id为get_id的value并赋值
+        if request.method == 'GET':
+            return render_template('shop.html', result=result[0])  # result[0] all_result
             # session['shop_info']格式：{'id':int, 'name': str, 'address': str, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
             # 如:{'name':'北京麦当劳潘家园餐厅','address':'北京市朝阳区劲松北路2号楼','evaluate':5.0,'category': '美食','pic': '/picture/0.jpg','introduction':'空空如也'}
-        else:
-            return redirect('login')
-    if request.method == 'POST':  # 检测：如果需要显示定位信息，则发送POST请求
-        if 'username' in session.keys():
-            result_dic = {}
-            x2, y2 = module.search_shop_get_loc(session['shop_info']['id'])
-            for people_id in session['people_list']:
-                x1, y1 = module.search_user_id_get_loc(people_id)
-                count, destination = pos_generation.get_navi(x1, y1, x2, y2)
-                result_dic[people_id] = [count, destination]
-            print(result_dic)
-            return json.dumps(result_dic)
-            # result_dic格式: {user_id:['location','time(单位秒)'],user_id:['location','time(单位秒)']}
+        elif request.method == 'POST':  # 传回整合后的推荐内容
+            data = (str(request.get_data(), encoding="UTF-8"))
+            # module.add_order(order_id, result[0]['id'], 5, data)
+            # module.add_participant(order_id, people_id)
         else:
             return redirect('login')
 
 
-@app.route('/welcome', methods=['GET', 'POST'])
+@app.route('/welcome')
 def welcome():
     session.clear()
     if request.method == 'GET':
         if 'username' in session.keys():
             return redirect('/')
+    return render_template('welcome.html')
+
+
+@app.route('/home', methods=['GET', 'POST'])
+def home():
+    if request.method == 'GET':
+        a = module.search_user_get_all(session['id'])
+        my_info = {'id': a.id, 'name': a.name, 'pic': a.pic, 'loc_lng': a.lng, 'loc_lat': a.loc_lat, 'time': a.time}
+        b = module.search_friend_get_list(session['id'])
+        follow_info = []
+        for user in b:
+            follow_info.append({'id': user.id, 'name': user.name, 'time': user.count_time, 'pic': user.pic,
+                                'loc_lng': user.loc_lng, 'loc_lat': user.loc_lat})
+        order_list = module.search_user_get_order_list(session['id'])
+        return render_template('welcome.html', result=[my_info, follow_info, order_list])
+    if request.method == 'POST':  # 加好友
+        data = (str(request.get_data(), encoding="UTF-8"))
+        module.add_friend()
     return render_template('welcome.html')
 
 
