@@ -75,18 +75,19 @@ def index():
 
 @app.route('/group/new', methods=['GET', 'POST'])
 def make_group():
+    session['id'] = 1  # 测试用
+    session['username'] = '111'  # 测试用
     if request.method == 'GET':
         if 'username' in session.keys():
-            friend_dict = module.search_friend_get_dict(session['id'])
-            return render_template('make_group.html', result=json.dumps(friend_dict))
-            # friend_dict格式：{id:{name:str,time:datetime,pic:str,loc_lng:float,loc_lat:float}
-            # e.g.: {"2": {"loc_lng": 115.999, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "222", "loc_lat": 39.4825}, "3": {"loc_lng": 116.704, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "333", "loc_lat": 39.5186}}
+            friend_list = module.search_friend_get_list(session['id'])
+            print(friend_list)
+            return render_template('test.html', result=json.dumps(friend_list))
+            # friend_list格式：{id:{name:str,time:datetime,pic:str,loc_lng:float,loc_lat:float}
+            # e.g.: {[ {"id":1, "loc_lng": 115.999, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "222", "loc_lat": 39.4825}, {"id":1, "loc_lng": 116.704, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "333", "loc_lat": 39.5186}]
         else:
             return redirect('/login')
 
     elif request.method == 'POST':
-        session['id'] = 1  # 测试用
-        session['username'] = '111'  # 测试用
         if 'username' in session.keys():
             data = json.loads(str(request.get_data(), encoding="UTF-8"))
             # 需要传回来的是勾选的id的dict,格式同friend_dict
