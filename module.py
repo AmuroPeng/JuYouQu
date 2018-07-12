@@ -179,7 +179,7 @@ def search_user_get_password(username):
     return user.password
 
 
-def search_user_get_loc(username):
+def search_user_name_get_loc(username):
     # 创建Session:
     session = DBSession()
     # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
@@ -188,6 +188,28 @@ def search_user_get_loc(username):
     x = user.loc_lng
     y = user.loc_lat
     session.commit()
+    session.close()
+    return x, y
+
+
+def search_user_id_get_loc(user_id):
+    # 创建Session:
+    session = DBSession()
+    # 创建Query查询，filter是where条件，最后调用one()返回唯一行，如果调用all()则返回所有行:
+    user = session.query(User).filter(User.id == user_id).one()
+    user.time = datetime.datetime.now()
+    x = user.loc_lng
+    y = user.loc_lat
+    session.commit()
+    session.close()
+    return x, y
+
+
+def search_shop_get_loc(shop_id):
+    session = DBSession()
+    shop = session.query(Shop).filter(Shop.id == shop_id).one()
+    x = shop.loc_lng
+    y = shop.loc_lat
     session.close()
     return x, y
 
@@ -215,7 +237,7 @@ def search_friend_get_dict(search_id):
     return result
 
 
-def search_shop_get_list(friend_loc_list):
+def search_shop_get_id_list(friend_loc_list):
     session = DBSession()
     shop_list_all = session.query(Shop).all()
     session.close()
@@ -236,6 +258,18 @@ def search_shop_get_list(friend_loc_list):
     return result_list
 
 
+def search_shop_get_info_dict(id_list):
+    session = DBSession()
+    result = {}
+    for i in id_list:
+        shop = session.query(Shop).filter(Shop.id == i).one()
+        result[i] = {'id': shop.id, 'name': shop.name, 'address': shop.address, 'evaluate': shop.evaluate,
+                     'category': shop.category,
+                     'pic': shop.pic, 'introduction': shop.introduction}
+    session.close()
+    return result
+
+
 # def search_():
 #     # 创建Session:
 #     session = DBSession()
@@ -249,9 +283,11 @@ def search_shop_get_list(friend_loc_list):
 if __name__ == '__main__':
     num = 1
 
-    x1, y1 = search_user_get_loc('111')
-    x2, y2 = search_user_get_loc('222')
-    x3, y3 = search_user_get_loc('333')
-    x4, y4 = search_user_get_loc('444')
-    result = search_shop_get_list([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
-    print(result)
+    # x1, y1 = search_user_get_loc('111')
+    # x2, y2 = search_user_get_loc('222')
+    # x3, y3 = search_user_get_loc('333')
+    # x4, y4 = search_user_get_loc('444')
+    # result = search_shop_get_id_list([[x1, y1], [x2, y2], [x3, y3], [x4, y4]])
+    # print(result)
+
+    print(search_shop_get_info_dict([12, 2, 3, 5]))
