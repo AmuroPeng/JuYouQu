@@ -49,46 +49,38 @@
       <ul class="nav navbar-nav">
          <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                <img src="index/images/flags/CN.png"/>
+
                 简体中文
                 <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
                 <img src="index/images/flags/US.png"/>
-                English(US) 
-                
+                English(US)
+
                 <li class="divider"></li>
-            
-             
+
+
               </ul>
         </li>
 
       </ul>
       <ul class="nav navbar-nav navbar-right">
             <li>
-                <a href="/login">
-                   
-                   登录
-                </a>
             </li>
-             <li>
-                <a href="/signup">
-                    
-                   注册
-                </a>
+            <li>
             </li>
              用户名{{ username }}
        </ul>
-      
+
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container -->
 </nav>
 <div class="main" style="background-image: url('index/images/default.jpg')">
 
 <!--    Change the image source '/images/default.jpg' with your favourite image.     -->
-    
+
     <div class="cover black" data-color="black"></div>
-     
+
 <!--   You can change the black color for the filter with those colors: blue, green, red, orange       -->
 
     <div class="container">
@@ -96,12 +88,12 @@
             聚友趣
         </h1>
 <!--  H1 can have 2 designs: "logo" and "logo cursive"           -->
-        
+
        <div class="content">
             <h4 class="motto">开始一次方便、快捷的聚餐吧</h4>
             <div style="text-align: center; ">
-            <a href="/location">
-            <img src="index/images/BackupUI/ju_logo.png" alt="your-image" class=" pic_border" style="margin: 0 auto;" >
+            <a href="/group/new">
+            <img src="{{ url_for('static', filename='location/img/BackupUI/ju_logo.png') }}" alt="your-image" class=" pic_border" style="margin: 0 auto;" >
             </a>
             </div>
             <div class="subscribe">
