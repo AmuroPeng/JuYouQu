@@ -69,56 +69,48 @@ def signup():
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    if request.method == 'GET':
-        if 'username' not in session.keys():
-            return redirect('welcome')
-        return render_template('index.html')  # 用{{username}}代替右上角的用户名
-    if request.method == 'POST':
-        if 'username' in session.keys():
-            data = (str(request.get_data(), encoding="UTF-8"))
-            # 需要传回来的是的请求搜索的内容 如：{str:'麦当劳'}
-            print(data)
-            # 需要补另一个线
-        else:
-            return redirect('login')
+    if 'username' not in session.keys():
+        return redirect('welcome')
+    elif request.method == 'POST':
+        data = (str(request.get_data(), encoding="UTF-8"))
+        # 需要传回来的是的请求搜索的内容 如：{str:'麦当劳'}
+        print(data)
+    return render_template('index.html', username=session['username'])  # 用{{username}}代替右上角的用户名
 
 
 @app.route('/group/new', methods=['GET', 'POST'])
 def make_group():
     # session['id'] = 1  # 测试用
     # session['username'] = '111'  # 测试用
-    session['lng'] = 116.162
-    session['lat'] = 40.5355
-    if request.method == 'GET':
-        if 'username' in session.keys():
-            friend_list = module.search_friend_get_list(session['id'])
-            print(friend_list)
-            return render_template('make_group.html', result=json.dumps(friend_list))
-            # friend_list格式：{id:{name:str,time:datetime,pic:str,loc_lng:float,loc_lat:float}
-            # e.g.: {[ {"id":1, "loc_lng": 115.999, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "222", "loc_lat": 39.4825}, {"id":1, "loc_lng": 116.704, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "333", "loc_lat": 39.5186}]
-        else:
-            return redirect('login')
-
+    # session['lng'] = 116.162  # 测试用
+    # session['lat'] = 40.5355  # 测试用
+    if 'username' not in session.keys():
+        return redirect('login')
+    elif request.method == 'GET':
+        print('收到get')
+        friend_list = module.search_friend_get_list(session['id'])
+        print(friend_list)
+        return render_template('make_group.html', result=json.dumps(friend_list))
+        # friend_list格式：{id:{name:str,time:datetime,pic:str,loc_lng:float,loc_lat:float}
+        # e.g.: {[ {"id":1, "loc_lng": 115.999, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "222", "loc_lat": 39.4825}, {"id":1, "loc_lng": 116.704, "time": 2, "pic": "/source/picture/icon/1.jpg", "name": "333", "loc_lat": 39.5186}]
     elif request.method == 'POST':
         print('收到post')
-        if 'username' in session.keys():
-            data = json.loads(str(request.get_data(), encoding="UTF-8"))
-            # 需要传回来的是勾选的id的dict,格式同friend_dict
-            print(data)
-            friend_loc = []
-            friend_id = []
-            for i in data:
-                friend_loc.append([i['loc_lng'], i['loc_lat']])
-                friend_id.append(int(i['id']))
-            friend_loc.append([session['lng'], session['lat']])  # 计算总用时需要加上自己的坐标
-            friend_id.append(session['id'])
-            result = module.search_shop_get_id_list(friend_loc)  # 传回来的是shop_id的list 格式：[id1,id2,id3]
-            session['shop_list'] = result
-            session['people_list'] = friend_id
-            print(session['people_list'])
-            return redirect("location")
-        else:
-            return redirect('login')
+        data = json.loads(str(request.get_data(), encoding="UTF-8"))
+        # 需要传回来的是勾选的id的dict,格式同friend_dict
+        print(data)
+        friend_loc = []
+        friend_id = []
+        for i in data:
+            friend_loc.append([i['loc_lng'], i['loc_lat']])
+            friend_id.append(int(i['id']))
+        friend_loc.append([session['lng'], session['lat']])  # 计算总用时需要加上自己的坐标
+        friend_id.append(session['id'])
+        result = module.search_shop_get_id_list(friend_loc)  # 传回来的是shop_id的list 格式：[id1,id2,id3]
+        session['shop_list'] = result
+        session['people_list'] = friend_id
+        print(session['people_list'])
+        return redirect("location")
+    return render_template('make_group.html')
 
 
 @app.route('/location', methods=['GET', 'POST'])
@@ -149,15 +141,15 @@ def location():
 def shop():
     # session['username'] = '111'  # 测试用
     # session['people_list'] = [1, 2, 3]  # 测试用
-    session['shop_info'] = {'id': 5, 'name': '北京麦当劳潘家园餐厅', 'address': '北京市朝阳区劲松北路2号楼', 'evaluate': 5.0,
-                            'category': '美食', 'pic': '/picture/0.jpg', 'introduction': '空空如也'}  # 测试用
+    # session['shop_info'] = {'id': 5, 'name': '北京麦当劳潘家园餐厅', 'address': '北京市朝阳区劲松北路2号楼', 'evaluate': 5.0,
+    #                         'category': '美食', 'pic': '/picture/0.jpg', 'introduction': '空空如也'}  # 测试用
     if request.method == 'GET':
         if 'username' in session.keys():
             get_id = request.args.get('id')
             result = module.search_shop_get_info_list([get_id])  # 只对选中的一个shop赋值
             print(result)
             session['shop_info'] = result  # 获取到id为get_id的value并赋值
-            return render_template('shop.html', result=json.dumps(session['shop_info']))
+            return render_template('shop.html', result=json.dumps(session['shop_info'][0]))
             # session['shop_info']格式：{'id':int, 'name': str, 'address': str, 'evaluate': float, 'category': str,'pic': str, 'introduction': str}
             # 如:{'name':'北京麦当劳潘家园餐厅','address':'北京市朝阳区劲松北路2号楼','evaluate':5.0,'category': '美食','pic': '/picture/0.jpg','introduction':'空空如也'}
         else:
@@ -179,6 +171,7 @@ def shop():
 
 @app.route('/welcome', methods=['GET', 'POST'])
 def welcome():
+    session.clear()
     if request.method == 'GET':
         if 'username' in session.keys():
             return redirect('/')
