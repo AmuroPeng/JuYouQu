@@ -16,7 +16,6 @@ from sqlalchemy import Column, String, create_engine, Float, DateTime, func, Int
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
-import time
 
 length = 100
 
@@ -25,6 +24,10 @@ Base = declarative_base()
 
 
 # 定义User对象:
+
+length = 100
+
+
 class User(Base):
     # 表的名字:
     __tablename__ = 'user'
@@ -40,6 +43,7 @@ class User(Base):
 
 
 class Shop(Base):
+
     __tablename__ = 'shop'
 
     id = Column(String(length), primary_key=True)
@@ -54,6 +58,7 @@ class Shop(Base):
 
 
 class Friend(Base):
+
     __tablename__ = 'friend'
 
     id_1 = Column(String(length), primary_key=True)
@@ -61,6 +66,7 @@ class Friend(Base):
 
 
 class Feature(Base):
+
     __tablename__ = 'Feature'
 
     shop_id = Column(String(length), primary_key=True)
@@ -68,6 +74,7 @@ class Feature(Base):
 
 
 class Order(Base):
+
     __tablename__ = 'Order'
 
     id = Column(String(length), primary_key=True)
@@ -79,6 +86,7 @@ class Order(Base):
 
 
 class Participant(Base):
+
     __tablename__ = 'Participant'
 
     order_id = Column(String(length), primary_key=True)
@@ -86,7 +94,7 @@ class Participant(Base):
 
 
 # 初始化数据库连接:
-engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test3')
+engine = create_engine('mysql+mysqlconnector://root:19961105@localhost:3306/test2')
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
 
