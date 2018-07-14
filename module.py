@@ -78,10 +78,10 @@ class Participant(Base):
     user_id = Column(String(length), primary_key=True)
 
 
-# 初始化数据库连接:
-engine = create_engine('mysql+mysqlconnector://root:amuluo@localhost:3306/test3')
-# 使用服务器时用此连接：
-# engine = create_engine('mysql+mysqlconnector://root:amuluo@127.0.0.1:3306/test3')
+# 本地数据库连接:
+engine = create_engine('mysql+mysqlconnector://用户名:密码@localhost:3306/数据库名字')
+# 服务器用此连接：
+# engine = create_engine('mysql+mysqlconnector://用户名:密码@127.0.0.1:3306/数据库名字')
 
 # 创建DBSession类型:
 DBSession = sessionmaker(bind=engine)
