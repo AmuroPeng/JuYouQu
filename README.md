@@ -50,8 +50,7 @@ SpatialRelationUtil 引射线法
 
 ![suanfa](https://github.com/AmuroPeng/JuYouQu/blob/master/image/suanfa.png)
 # 预览图
-![my_wife]
-(https://github.com/AmuroPeng/JuYouQu/blob/master/image/my_wife.jpg)
+![my_wife](https://github.com/AmuroPeng/JuYouQu/blob/master/image/my_wife.png)  
 咳咳咳不对，不是这张  
 
 ![index](https://github.com/AmuroPeng/JuYouQu/blob/master/image/index.png)  
