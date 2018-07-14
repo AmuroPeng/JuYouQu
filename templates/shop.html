@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>shop</title>
+
+  <meta charset="utf-8">
+  <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <meta name="description" content="">
+
+  <!-- Google Fonts -->
+  <link href='http://fonts.googleapis.com/css?family=Questrial:400%7CMontserrat:300,400,700,700i' rel='stylesheet'>
+
+  <!-- Css -->
+  <!-- <link rel="stylesheet" href="shop/css/shop-bootstrap.min.css" />
+  <link rel="stylesheet" href="shop/css/shop-font-icons.css" />
+  <link rel="stylesheet" href="shop/css/shop-style.css" />
+  <link rel="stylesheet" href="shop/css/shop-color.css" /> -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='shop/css/shop-bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/css/shop-font-icons.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/css/shop-style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='shop/css/shop-color.css') }}">
+  <script LANGUAGE="JavaScript">;
+        function openwin() {
+	alert("you clicked");
+            $.post('/shop',
+                function(data) {
+                    alert("reseive");
+                });
+        }
+    </script>
+  <script>
+        // var r = '{{result|safe}}';
+        // var obj = JSON.parse(r);
+        // alert(obj);
+        var r = '{{result|safe}}';
+        var obj = JSON.parse(r);
+        alert(obj.id);
+        // var obj = {
+        //     'name': '北京麦当劳潘家园餐厅',
+        //     'address': '北京市朝阳区劲松北路2号楼',
+        //     'evaluate': 5.0,
+        //     'category': '美食',
+        //     'pic': '/picture/0.jpg',
+        //     'introduction': '空空如也'
+        // };
+        // alert(obj.name)
+  </script>
+</head>
+
+<body>
+
+
+  <main class="main oh" id="main">
+
+    <!-- Navigation -->
+    <header class="nav">
+
+      <div class="nav__holder nav--sticky">
+        <div class="container relative">
+
+
+          <div class="flex-parent">
+
+
+            <!-- Logo -->
+            <a href="index.html">
+              <img  src="shop/img/BackupUI/ju_logo.png" alt="logo" padding-top="10px">
+            </a>
+            <a href="person page.html">
+              <p style="font-size:25px">个人</br>中心</p>
+            </a>
+
+          </div> <!-- end flex-parent -->
+        </div> <!-- end container -->
+
+      </div>
+    </header> <!-- end navigation -->
+
+    <!-- Single Product -->
+    <section class="section-wrap pb-20 product-single">
+      <div class="container">
+        <!-- 店家图片 ：-->
+        <div class="row">
+
+          <div class="col-md-6 product-slider mb-50">
+
+            <div class="flickity flickity-slider-wrap mfp-hover" id="gallery-main">
+
+              <div class="gallery-cell">
+
+                  <img src="shop/img/shop/item_lg_1.jpg" alt="" />
+
+              </div>
+
+            </div> <!-- end gallery main -->
+          </div> <!-- end col img slider -->
+
+          <div class="col-md-6 product-single">
+            <h1 class="product-single__title uppercase" id="name1">商家名称</h1>
+
+            <div class="rating" id="evaluate1">  3 Reviews </div>
+
+            <span class="product-single__price">
+              <ins>
+                <span class="amount" id="intro1"></span>简介</span>
+              </ins>
+
+            </span>
+
+
+
+
+
+            <div class="row row-10 product-single__actions clearfix">
+              <div class="col">
+               <!-- <a href="friendlist.html" class="btn btn-lg btn-color product-single__add-to-cart" >
+                  <i class="ui-bag"></i>
+                  <span>创建聚会群组</span>
+                </a>-->
+                <input type="button" onclick="openwin()" value="创建聚会群组">
+              </div>
+             <!-- <div class="col">
+                <a href="#" class="btn btn-lg btn-dark product-single__add-to-wishlist">
+                  <i class="ui-heart"></i>
+                  <span>标记一下，日后再去</span>
+                </a>
+              </div>-->
+            </div>
+
+            <div class="product_meta">
+              <ul>
+                <li>
+                  <span class="product-code">分类： <span id="cat1">111763</span></span>
+                </li>
+                <li>
+                  <span class="product-material">位置: <span id="loc1">Cotton 100%</span></span>
+                </li>
+
+              </ul>
+            </div>
+
+
+
+          </div> <!-- end col product description -->
+        </div> <!-- end row -->
+
+      </div> <!-- end container -->
+    </section> <!-- end single product -->
+
+
+
+  </main> <!-- end main-wrapper -->
+
+  <script>
+      document.getElementById("name1").innerHTML = obj.name;
+      document.getElementById("evaluate1").innerHTML = obj.evaluate;
+      document.getElementById("cat1").innerHTML = obj.category;
+      document.getElementById("intro1").innerHTML = obj.introduction;
+      document.getElementById("loc1").innerHTML = obj.address;
+      document.getElementById("pic1").src="location/img/BackupUI/ju_logo.png";
+
+
+  </script>
+
+  <!-- jQuery Scripts -->
+  <!-- <script type="text/javascript" src="shop/js/jquery.min.js"></script>
+  <script type="text/javascript" src="shop/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="shop/js/easing.min.js"></script>
+  <script type="text/javascript" src="shop/js/jquery.magnific-popup.min.js"></script>
+  <script type="text/javascript" src="shop/js/owl-carousel.min.js"></script>
+  <script type="text/javascript" src="shop/js/flickity.pkgd.min.js"></script>
+  <script type="text/javascript" src="shop/js/modernizr.min.js"></script>
+  <script type="text/javascript" src="shop/js/scripts.js"></script> -->
+  <link  href="{{ url_for('static', filename='shop/js/jquery.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/bootstrap.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/jquery.magnific-popup.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/easing.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/owl-carousel.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/flickity.pkgd.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/modernizr.min.js') }}">
+  <link  href="{{ url_for('static', filename='shop/js/scripts.js') }}">
+</body>
+</html>

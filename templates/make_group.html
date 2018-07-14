@@ -1,0 +1,76 @@
+<html>
+
+<head>
+    <title>select_fri</title>
+    <meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <!-- <script src="jquery-3.3.1.js"></script> -->
+    <style>
+        #formid {
+            width: 50%;
+            margin-left: 25%;
+            margin-right: auto;
+            margin-top: 50px;
+        }
+
+        .displayfrd {
+            width: 45%;
+            float: left;
+            margin-top: 30px;
+            margin-left: 15px;
+        }
+
+        .subfrdinfo {
+            padding: 0 5px;
+        }
+
+        #sbmt {
+            margin-top: 200px;
+            float: left;
+            margin-left: 10%;
+        }
+    </style>
+    <script>
+        var r = '{{result|safe}}';
+        var obj = JSON.parse(r);
+        alert(obj);
+    </script>
+</head>
+
+<body>
+    <h1 style="text-align: center;background-color: darkcyan">选择好友{{result.message}}</h1>
+    <form id="formid" method="post">
+        <!-- <script>
+            $("#formid").append(`<div class='displayfrd'><fieldset><legend><input type='checkbox'/>PYinfo</legend><div class='subfrdinfo'><p>` + obj.status + `</p><p>zhangsaninfo</p></div></fieldset></div>`);
+            $("#formid").append(`<div class='displayfrd'><fieldset><legend><input type='checkbox'/>PYinfo</legend><div class='subfrdinfo'><p>zhang3</p><p>zhangsaninfo</p></div></fieldset></div>`);
+        </script> -->
+        <!-- <input id="sbmt" type="submit" value="创建聚会名单"> -->
+        <button type="button">click</button>
+    </form>
+</body>
+
+</html>
+<script>
+    for (var i = 0; i < obj.length; i++) {
+        $("#formid").append(`<div class='displayfrd'><fieldset><legend><input name="same" value="` + obj[i].name + `" type='checkbox'/>PYinfo</legend><div class='subfrdinfo'><p>姓名：` + obj[i].name + `</p><p>上次登录时间：` + obj[i].time + `小时前</p></div></fieldset></div>`);
+    }
+</script>
+<script>
+    $("button").click(function() {
+        var j =  new Array();
+        var groupCheckbox = $("input[name='same']");
+        for (i = 0; i < groupCheckbox.length; i++) {
+            if (groupCheckbox[i].checked) {
+                j.push((obj[i]))
+                }
+            }
+        alert(j)
+        var data = JSON.stringify(j);
+        $.post('/group/new',
+            data,
+            function(){
+                window.location.href = '/location'
+            });
+    });
+</script>

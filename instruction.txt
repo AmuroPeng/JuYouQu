@@ -1,0 +1,4 @@
+nginx -s quit
+mysql -u root -p
+cd JuYouQu/
+sudo python3 ./main.py 

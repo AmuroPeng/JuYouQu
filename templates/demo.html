@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo</title>
+</head>
+<body>
+
+<form method="post">
+    <label>用户名:</label><input type="text" name="username"><br>
+    <label>密码:</label><input type="password" name="password"><br>
+    <label>确认密码:</label><input type="password" name="password2"><br>
+    <input type="submit" value="提交"><br>
+{#    显示登陆状态消息#}
+    {% for message in get_flashed_messages() %}
+        {{ message }}
+    {% endfor %}
+
+
+</form>
+
+
+{#{{ url_str }} <br>#}
+{#{{ my_list }} <br>#}
+{#{{ my_dict[0] }} <br>#}
+{#1#}
+{#{{ my_dict.name }} <br>#}
+{#2#}
+{#{{ my_dict['name2'] }} <br>#}
+{#3#}
+{#{{ my_dict[1] }} <br>#}
+{##}
+{#{% for num in my_list %}#}
+{#    {% if num >3 %}#}
+{#        {{ num }}<br>#}
+{#    {% endif %}#}
+{#{% endfor %}#}
+
+{#<hr>#}
+{#{{ url_str | reverse }}#}
+
+<hr>
+<form method="post">
+    {{ form.username.label }}
+
+</form>

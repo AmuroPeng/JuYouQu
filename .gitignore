@@ -1,0 +1,12 @@
+
+\.idea/
+
+Server/__pycache__/
+
+__pycache__/
+
+*.pyc
+
+test_demo\.py
+
+test\.py
