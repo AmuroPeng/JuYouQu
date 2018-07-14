@@ -12,7 +12,7 @@ import SpatialRelaiton
 from sqlalchemy.orm import class_mapper
 
 app = Flask(__name__)
-app.secret_key = '111'
+app.secret_key = 'StrongPassword'
 
 
 # 全局变量
