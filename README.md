@@ -42,6 +42,7 @@ WTForms==2.2.1
 为了简化商铺数据库的添加，可在使用前执行：
 > python3 insert_module.py
 
+如果在服务器上运行，需要先停止Nginx等反向代理进程
 # 参考
 Graham 扫描法  
 SpatialRelationUtil 引射线法  
